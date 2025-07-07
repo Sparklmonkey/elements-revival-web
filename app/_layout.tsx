@@ -1,29 +1,18 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import React from "react";
+import Index from "@/app/index";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import * as Font from "expo-font";
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+export default class App extends React.Component {
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
+  async componentDidMount() {
+    await Font.loadAsync({
+      'gillSans':  require('../assets/fonts/Gill-Sans.ttf'),
+      'evanescence': require('../assets/fonts/Evanescence.ttf'),
+      'dauphin': require('../assets/fonts/Dauphin.ttf'),
+    })
   }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+  render() {
+    return <Index />;
+  }
 }
