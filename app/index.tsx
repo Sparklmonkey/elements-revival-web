@@ -3,92 +3,101 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Styles} from "@expo/config-plugins/build/android";
 
 export default function Index() {
-  return (
-      <SafeAreaView>
-          <View style={styles.navbar}>
-              <View style={styles.navbarTitleButton}>
-                  <Text style={styles.navbarTitle}>Elements The Revival</Text>
-              </View>
-              <View style={styles.navbarButton}>
-                  <Text style={styles.navbarText}>Wiki</Text>
-              </View>
-              <View style={styles.navbarButton}>
-                  <Text style={styles.navbarText}>Forum</Text>
-              </View>
-              <View style={styles.navbarButton}>
-                  <Text style={styles.navbarText}>Game Rules</Text>
-              </View>
-              <View style={styles.navbarButton}>
-                  <Text style={styles.navbarText}>Contact</Text>
-              </View>
-              <View style={styles.navbarButton}>
-                  <Text style={styles.navbarText}>Support Us</Text>
-              </View>
-          </View>
-          <View style={{backgroundColor:'#321100' }}>
-              <View style={{
-                  borderWidth: 2,
-                  borderRadius: 14,
-                  borderColor: '#D38030',
-                  height: 75,
-                  backgroundColor: '#411B00',
-                  width: '70%',
-                  alignSelf: 'center',
-                  marginTop: 75,
-                  zIndex: 2,
-                  flexDirection: 'row',
-                  alignContent: 'center',
-                  paddingHorizontal: 15
-              }}>
-                  <Text style={{
-                      alignSelf: 'center',
-                      fontFamily: 'dauphin',
-                      color: '#EBF166',
-                      fontSize: 24
-                  }}>Version 5.3.3</Text>
-              </View>
-          <View style={{maxHeight: 997, backgroundColor:'#321100', paddingTop: 20, flexDirection:'row', marginTop: -150}}>
+    return (
+        <SafeAreaView>
+            <View style={styles.navbar}>
+                <View style={styles.navbarTitleButton}>
+                    <Text style={styles.navbarTitle}>Elements The Revival</Text>
+                </View>
+                <View style={styles.navbarButton}>
+                    <Text style={styles.navbarText}>Wiki</Text>
+                </View>
+                <View style={styles.navbarButton}>
+                    <Text style={styles.navbarText}>Forum</Text>
+                </View>
+                <View style={styles.navbarButton}>
+                    <Text style={styles.navbarText}>Game Rules</Text>
+                </View>
+                <View style={styles.navbarButton}>
+                    <Text style={styles.navbarText}>Contact</Text>
+                </View>
+                <View style={styles.navbarButton}>
+                    <Text style={styles.navbarText}>Support Us</Text>
+                </View>
+            </View>
+            <View style={{backgroundColor: '#321100'}}>
+                <View style={styles.gamebar}>
+                    <Text style={{
+                        alignSelf: 'center',
+                        fontFamily: 'dauphin',
+                        color: '#EBF166',
+                        fontSize: 24,
+                        width: '25%',
+                    }}>Version 5.3.3</Text>
+                    <View style={{flexDirection: 'row', alignItems: 'flex-end', width:'75%', justifyContent: 'flex-end', alignContent:'flex-end'}}>
+                        <View style={styles.gamebarButton}>
+                            <Image source={require('../assets/images/button.png')} resizeMode='contain' style={styles.gamebarButtonImage}>
+                            </Image>
+                        </View>
+                        <View style={styles.gamebarButton}>
+                            <Image source={require('../assets/images/button.png')} resizeMode='contain' style={styles.gamebarButtonImage}>
+                            </Image>
+                        </View>
+                        <View style={styles.gamebarButton}>
+                            <Image source={require('../assets/images/button.png')} resizeMode='contain' style={styles.gamebarButtonImage}>
+                            </Image>
+                        </View>
+                    </View>
 
-              <View style={{
-                  flex: 1,
-                  justifyContent: 'flex-start',
-                  width: '50%',
-                  paddingHorizontal: 10,
-              }}>
-                  <Image source={require('../assets/images/rightImg.png')} resizeMode='stretch' style={
-                      {
-                          maxWidth: 763,
-                          aspectRatio: 1,
-                          marginTop: 0,
-                          width: '100%',
-                      }}>
+                </View>
+                <View style={{
+                    maxHeight: 997,
+                    backgroundColor: '#321100',
+                    paddingTop: 20,
+                    flexDirection: 'row',
+                    marginTop: -150
+                }}>
 
-                  </Image>
-              </View>
-              <View style={{
-                  flex: 1,
-                  alignItems: 'flex-end',
-                  width: '50%',
-                  paddingHorizontal: 10,
-              }}>
+                    <View style={{
+                        flex: 1,
+                        justifyContent: 'flex-start',
+                        width: '50%',
+                        paddingHorizontal: 10,
+                    }}>
+                        <Image source={require('../assets/images/rightImg.png')} resizeMode='stretch' style={
+                            {
+                                maxWidth: 763,
+                                aspectRatio: 1,
+                                marginTop: 0,
+                                width: '100%',
+                            }}>
 
-                  <Image source={require('../assets/images/rightImg.png')} resizeMode='stretch' style={
-                      {
-                          maxWidth: 763,
-                          aspectRatio: 1,
-                          width: '100%',
-                          marginTop: 0,
-                          transform: [
-                              { scaleX: -1 }]
-                      }}>
-                  </Image>
-              </View>
-          </View>
+                        </Image>
+                    </View>
+                    <View style={{
+                        flex: 1,
+                        alignItems: 'flex-end',
+                        width: '50%',
+                        paddingHorizontal: 10,
+                    }}>
 
-          </View>
-      </SafeAreaView>
+                        <Image source={require('../assets/images/rightImg.png')} resizeMode='stretch' style={
+                            {
+                                maxWidth: 763,
+                                aspectRatio: 1,
+                                width: '100%',
+                                marginTop: 0,
+                                transform: [
+                                    {scaleX: -1}]
+                            }}>
+                        </Image>
+                    </View>
+                </View>
 
-  );
+            </View>
+        </SafeAreaView>
+
+    );
 }
 
 const styles = StyleSheet.create({
@@ -104,7 +113,8 @@ const styles = StyleSheet.create({
     },
     navbarButton: {
         alignItems: 'flex-end',
-        alignContent: 'center'
+        alignContent: 'center',
+        justifyContent: 'center',
     },
     navbarTitleButton: {
         flex: 1,
@@ -125,5 +135,31 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         fontSize: 40,
         fontFamily: 'evanescence',
+    },
+    gamebar: {
+        borderWidth: 2,
+        borderRadius: 14,
+        borderColor: '#D38030',
+        height: 75,
+        backgroundColor: '#411B00',
+        width: '70%',
+        alignSelf: 'center',
+        marginTop: 75,
+        zIndex: 2,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 15
+    },
+    gamebarButton: {
+        alignItems: 'flex-end',
+        alignSelf:'center',
+        justifyContent: 'flex-end',
+        height: 32,
+        width: 180,
+    },
+    gamebarButtonImage: {
+        alignItems: 'center',
+        width: '100%',
+        height: '100%'
     }
 })
