@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     trainer: {
         fontSize: 12,
         textAlign: "left",
-        fontFamily: "gillSans",
+        fontFamily: "dauphin",
+        color: '#EBF166',
     },
     buttonIcon: {
         width: 120,
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
         zIndex: 3,
         gap: 24,
         width: '75%',
+        marginTop: 50,
     },
     gameBar: {
         backgroundColor: "#411b00",
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
         fontFamily: "dauphin",
         textAlign: "left",
         fontSize: 18,
+        color: '#EBF166',
         flex: 1
     },
 });

@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: '5%',
         paddingTop: 0,
-        marginTop: -125
+        marginTop: -175
     }
 })

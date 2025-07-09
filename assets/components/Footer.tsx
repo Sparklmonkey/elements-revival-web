@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         gap: 43,
         zIndex: 6,
         paddingHorizontal: 120,
-        width: 1440,
+        width: '100%',
         overflow: "hidden"
     },
     enterEMailHere: {
