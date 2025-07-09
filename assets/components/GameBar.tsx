@@ -7,29 +7,20 @@ const GameBar = () => {
         <View style={styles.game}>
             <View style={styles.gameBar}>
                 <Text style={styles.version553}>Version 5.5.3</Text>
-                <ImageBackground style={styles.buttonIcon} resizeMode="cover" source={require("../images/button.png")}>
+                <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
                     <Text style={styles.trainer}>Trainer</Text>
                 </ImageBackground>
-                <ImageBackground style={styles.buttonIcon} resizeMode="cover" source={require("../images/button.png")}>
+                <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
                     <Text style={styles.trainer}>Setting</Text>
                 </ImageBackground>
-                <ImageBackground style={styles.buttonIcon} resizeMode="cover" source={require("../images/button.png")}>
+                <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
                     <Text style={styles.trainer}>Game Rules</Text>
                 </ImageBackground>
             </View>
-            <Image style={styles.gameIconLayout} resizeMode="cover" source={require("../images/my-version.png")}/>
         </View>
     );
 };
 const styles = StyleSheet.create({
-    gameIconLayout: {
-        maxWidth: "100%",
-        overflow: "hidden",
-        height: 561,
-        borderRadius: 16,
-        alignSelf: "stretch",
-        width: "100%",
-    },
     trainer: {
         fontSize: 12,
         textAlign: "left",
@@ -37,9 +28,8 @@ const styles = StyleSheet.create({
     },
     buttonIcon: {
         width: 120,
-        height: 24,
+        height: 26,
         paddingVertical: 9,
-        paddingHorizontal: 53,
         justifyContent: "center",
         flexDirection: "row",
         alignItems: "center"
@@ -47,11 +37,11 @@ const styles = StyleSheet.create({
     game: {
         zIndex: 3,
         gap: 24,
-        width: 1200
+        width: '75%',
     },
     gameBar: {
         backgroundColor: "#411b00",
-        paddingHorizontal: 16,
+        paddingHorizontal: 24,
         paddingVertical: 12,
         gap: 16,
         borderWidth: 2,

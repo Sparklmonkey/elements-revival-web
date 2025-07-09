@@ -1,11 +1,14 @@
-import {Image, StyleSheet, View} from "react-native";
+import {Image, ImageBackground, StyleSheet, View} from "react-native";
 import * as React from "react";
+import { Dimensions } from 'react-native';
 
+const win = Dimensions.get('window');
+const ratio = win.width/763;
 const BackgroundDragon = () => {
     return (
-        <View>
-            <Image style={styles.dragonsIcon} resizeMode="cover" source={require("../images/rightImg.png")} />
-            <Image style={styles.dragonsIcon1} resizeMode="cover" source={require("../images/rightImg.png")} />
+        <View style={styles.container}>
+            <ImageBackground style={styles.dragonsIcon} resizeMode="stretch" source={require("../images/rightImg.png")} />
+            <ImageBackground style={styles.dragonsIcon1} resizeMode="stretch" source={require("../images/rightImg.png")} />
         </View>
     );
 };
@@ -15,21 +18,34 @@ export default BackgroundDragon;
 
 const styles = StyleSheet.create({
     dragonsIcon: {
-        left: 0,
-        zIndex: 0,
-        position: "absolute",
-        height: 997,
-        top: 90,
+        opacity: 0.1,
+        zIndex: 2,
+        aspectRatio: 1,
         width: 763,
+        maxWidth: '50%',
+        flex: 1,
+        maxHeight: 997,
+    },
+    dragonsIcon1: {
+        opacity: 0.1,
+        zIndex: 2,
+        left: 0,
+        alignSelf: 'flex-start',
+        aspectRatio: 1,
+        maxHeight: 997,
+        width: 763,
+        maxWidth: '50%',
+        flex: 1,
         transform: [
             {scaleX: -1}]
     },
-    dragonsIcon1: {
-        zIndex: 1,
-        position: "absolute",
-        right: 0,
-        height: 997,
-        top: 90,
-        width: 763
+    container: {
+        width: '100%',
+        zIndex: -1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingHorizontal: '5%',
+        paddingTop: 0,
+        marginTop: -125
     }
 })

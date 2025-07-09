@@ -10,15 +10,18 @@ import BulletPoint from "@/assets/components/BulletPoint";
 import BackgroundDragon from "@/assets/components/BackgroundDragon";
 import NavBar from "@/assets/components/NavBar";
 import GameBar from "@/assets/components/GameBar";
+import Footer from "@/assets/components/Footer";
 
 const Container = () => {
 
     return (
         <View style={styles.container}>
                 <View style={styles.view}>
-                    <BackgroundDragon />
                     <NavBar />
                     <GameBar />
+                    <BackgroundDragon />
+
+                    <Image style={styles.gameIconLayout} resizeMode="cover" source={require("../images/my-version.png")}/>
                     <View style={[styles.aboutGame, styles.gameBorder]}>
                         <Text style={[styles.aboutElementsThe, styles.gamesTypo]}>About Elements The Revival</Text>
                         <View style={styles.text}>
@@ -56,50 +59,7 @@ Each Elemental creates a deck of cards based around their core element to fight 
                             </ImageBackground>
                         </View>
                     </View>
-                    <View style={[styles.footer, styles.navBarSpaceBlock]}>
-                        <View style={[styles.container1, styles.groupFlexBox]}>
-                            <View style={styles.leftContainer}>
-                                <View style={styles.gameDescription}>
-                                    <Text style={[styles.elementsTheRevival1, styles.elementsTypo1]}>Elements The Revival</Text>
-                                    <Text style={[styles.revivingTheSoul, styles.theTypo]}>Reviving the soul of forgotten things.</Text>
-                                    <View style={styles.socials}>
-                                        <Caretdown style={[styles.socialLinksIcon, styles.iconLayout]} width={32} height={32} />
-                                        <Caretdown width={32} height={32} />
-                                    </View>
-                                </View>
-                                <View style={styles.contactUs}>
-                                    <Text style={[styles.contactUs1, styles.contactUs1Typo]}>Contact Us</Text>
-                                    <View style={[styles.inputArea, styles.buttonFlexBox]}>
-                                        <Text style={[styles.enterEMailHere, styles.sendTypo]}>Enter e-mail here</Text>
-                                        <View style={[styles.button, styles.buttonFlexBox]}>
-                                            <Text style={[styles.send, styles.sendTypo]}>Send</Text>
-                                        </View>
-                                    </View>
-                                </View>
-                                <Text style={[styles.elementsTheRevival2, styles.elementsTypo]}>© 2025 Elements: The Revival</Text>
-                            </View>
-                            <View style={[styles.allLinks, styles.groupFlexBox]}>
-                                <View style={styles.quickLinks}>
-                                    <Text style={[styles.quickLinks1, styles.gamesTypo]}>Quick Links</Text>
-                                    <View style={styles.tips}>
-                                        <QuickLink linkName={"About"} />
-                                        <QuickLink linkName={"Contact"} />
-                                        <QuickLink linkName={"Privacy Policy"} />
-                                        <QuickLink linkName={"Terms of Use"} />
-                                    </View>
-                                </View>
-                                <View style={styles.quickLinks2}>
-                                    <Text style={[styles.games, styles.gamesTypo]}>Games</Text>
-                                    <View style={styles.tips}>
-                                        <QuickLink linkName={"Elements the Revival"} />
-                                        <QuickLink linkName={"Open EtG"} />
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                        <Image style={[styles.footerChild, styles.footerChildPosition]} resizeMode="cover"  source={require("../images/footer-dragon.png")} />
-                        <Caretdown style={[styles.decorativeLineIcon, styles.gameIconLayout]} />
-                    </View>
+                    <Footer />
                 </View>
         </View>);
 };
@@ -107,13 +67,8 @@ Each Elemental creates a deck of cards based around their core element to fight 
 const styles = StyleSheet.create({
     container: {
         height: 250,
-        backgroundColor: "rgba(50, 17, 0, 0.5)",
+        backgroundColor: "rgba(50, 17, 0, 1)",
         flex: 1
-    },
-    dragonsIconLayout: {
-        height: 997,
-        top: 90,
-        width: 763
     },
     footerChildPosition: {
         zIndex: 1,
@@ -152,7 +107,7 @@ const styles = StyleSheet.create({
     },
     gameBorder: {
         padding: 24,
-        backgroundColor: "rgba(80, 33, 4, 0.25)",
+        backgroundColor: "rgba(80, 33, 4, 1)",
         borderWidth: 2,
         borderColor: "#d38030",
         borderStyle: "solid"
@@ -424,7 +379,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         alignSelf: "stretch"
     },
-    socialLinksIcon: {},
     socials: {
         gap: 7,
         flexDirection: "row"
@@ -524,7 +478,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         overflow: "hidden",
         width: "100%",
-        backgroundColor: "rgba(50, 17, 0, 0.5)",
+        backgroundColor: "rgba(50, 17, 0, 1)",
         flex: 1
     }
 });

@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
     navBar: {
         borderColor: "#665533",
         borderBottomWidth: 1,
-        paddingVertical: 16,
+        paddingVertical: 10,
         zIndex: 2,
         borderStyle: "solid",
-        paddingHorizontal: 120,
-        width: 1440,
+        paddingHorizontal: 100,
+        width: '100%',
     },
     groupFlexBox: {
         gap: 0,
