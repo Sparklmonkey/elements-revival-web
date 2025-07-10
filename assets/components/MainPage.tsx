@@ -1,33 +1,39 @@
 import * as React from "react";
 import {Image, StyleSheet, Text, View, ImageBackground, ScrollView} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Caretdown from "@/assets/components/caretdown"
-import LeftArrow from "@/assets/components/LeftArrow";
-import RightArrow from "@/assets/components/RightArrow";
-import GradientText from "@/assets/components/GradientText";
-import QuickLink from "@/assets/components/QuickLink";
-import BulletPoint from "@/assets/components/BulletPoint";
 import BackgroundDragon from "@/assets/components/BackgroundDragon";
 import NavBar from "@/assets/components/NavBar";
 import GameBar from "@/assets/components/GameBar";
 import Footer from "@/assets/components/Footer";
 import GameDescription from "@/assets/components/GameDescription";
 import OtherGames from "@/assets/components/OtherGames";
+import {Unity, useUnityContext} from "react-unity-webgl";
+import {Fragment} from "react";
 
 const Container = () => {
-
+    const { unityProvider, loadingProgression, isLoaded } = useUnityContext({
+        loaderUrl: '../unity/Build/UnityLoader.js',
+        dataUrl: "../unity/Build/Unity.data",
+        frameworkUrl: "../unity/Build/Unity.framework.js",
+        codeUrl: "../unity/Build/Unity.wasm",
+    });
     return (
         <View style={styles.container}>
-                <View style={styles.view}>
-                    <NavBar />
-                    <GameBar />
-                    <BackgroundDragon />
-                    <Image style={styles.gameIconLayout} resizeMode="cover" source={require("../images/my-version.png")}/>
-                    <GameDescription />
-                    <OtherGames />
-                    <Footer />
-                </View>
-        </View>);
+            <View style={styles.view}>
+                <NavBar />
+                <GameBar />
+                <BackgroundDragon />
+                <Fragment>
+                    {!isLoaded && (
+                        <p>Loading Application... {Math.round(loadingProgression * 100)}%</p>
+                    )}
+                <Unity unityProvider={unityProvider} style={styles.gameIconLayout}  />
+                </Fragment>
+                <GameDescription />
+                <OtherGames />
+                <Footer />
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
