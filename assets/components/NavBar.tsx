@@ -1,8 +1,15 @@
 import * as React from "react";
-import {Text, StyleSheet, View} from "react-native";
+import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Caretdown from '@/assets/components/caretdown';
+import {
+    createStaticNavigation,
+    useNavigation,
+} from '@react-navigation/native';
+
 const NavBar = () => {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.navBar}>
             <View style={styles.groupFlexBox}>
@@ -10,7 +17,9 @@ const NavBar = () => {
                 <View style={styles.links}>
                     <Text style={styles.wiki}>Wiki</Text>
                     <Text style={styles.wiki}>Forum</Text>
-                    <Text style={styles.wiki}>Game Rules</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('GameRulesPage')}>
+                        <Text style={styles.wiki}>Game Rules</Text>
+                    </TouchableOpacity>
                     <View style={styles.contact}>
                         <Text style={styles.wiki}>Contact</Text>
                         <Caretdown width={16} height={16} />

@@ -5,55 +5,58 @@ import * as React from "react";
 import InstagramIcon from "@/assets/components/InstagramIcon";
 import YoutubeIcon from "@/assets/components/YoutubeIcon";
 import FooterDragon from "@/assets/components/FooterDragon";
+import FooterDecor from "@/assets/components/FooterDecor";
 
 const Footer = () => {
 
     return (
-
-<View style={styles.footer}>
-    <View style={styles.container1}>
-        <View style={styles.leftContainer}>
-            <View style={styles.gameDescription}>
-                <Text style={styles.elementsTheRevival1}>Elements The Revival</Text>
-                <Text style={styles.revivingTheSoul}>Reviving the soul of forgotten things.</Text>
-                <View style={styles.socials}>
-                    <InstagramIcon />
-                    <YoutubeIcon />
-                </View>
-            </View>
-            <View style={styles.contactUs}>
-                <Text style={styles.contactUs1Typo}>Contact Us</Text>
-                <View style={styles.inputArea}>
-                    <Text style={styles.enterEMailHere}>Enter e-mail here</Text>
-                    <View style={styles.button}>
-                        <Text style={styles.send}>Send</Text>
+        <View style={styles.container}>
+            <FooterDecor width={'100%'}/>
+            <View style={styles.footer}>
+                <View style={styles.container1}>
+                    <View style={styles.leftContainer}>
+                        <View style={styles.gameDescription}>
+                            <Text style={styles.elementsTheRevival1}>Elements The Revival</Text>
+                            <Text style={styles.revivingTheSoul}>Reviving the soul of forgotten things.</Text>
+                            <View style={styles.socials}>
+                                <InstagramIcon/>
+                                <YoutubeIcon/>
+                            </View>
+                        </View>
+                        <View style={styles.contactUs}>
+                            <Text style={styles.contactUs1Typo}>Contact Us</Text>
+                            <View style={styles.inputArea}>
+                                <Text style={styles.enterEMailHere}>Enter e-mail here</Text>
+                                <View style={styles.button}>
+                                    <Text style={styles.send}>Send</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>
+                    </View>
+                    <View style={styles.allLinks}>
+                        <View style={styles.quickLinks}>
+                            <Text style={styles.quickLinks1}>Quick Links</Text>
+                            <View style={styles.tips}>
+                                <QuickLink linkName={"About"}/>
+                                <QuickLink linkName={"Contact"}/>
+                                <QuickLink linkName={"Privacy Policy"}/>
+                                <QuickLink linkName={"Terms of Use"}/>
+                            </View>
+                        </View>
+                        <View style={styles.quickLinks2}>
+                            <Text style={styles.games}>Games</Text>
+                            <View style={styles.tips}>
+                                <QuickLink linkName={"Elements the Revival"}/>
+                                <QuickLink linkName={"Open EtG"}/>
+                            </View>
+                        </View>
                     </View>
                 </View>
-            </View>
-            <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>
-        </View>
-        <View style={styles.allLinks}>
-            <View style={styles.quickLinks}>
-                <Text style={styles.quickLinks1}>Quick Links</Text>
-                <View style={styles.tips}>
-                    <QuickLink linkName={"About"} />
-                    <QuickLink linkName={"Contact"} />
-                    <QuickLink linkName={"Privacy Policy"} />
-                    <QuickLink linkName={"Terms of Use"} />
-                </View>
-            </View>
-            <View style={styles.quickLinks2}>
-                <Text style={styles.games}>Games</Text>
-                <View style={styles.tips}>
-                    <QuickLink linkName={"Elements the Revival"} />
-                    <QuickLink linkName={"Open EtG"} />
-                </View>
+                <Image style={styles.footerChild} resizeMode="cover" source={require("../images/footer-dragon.png")}/>
+                <FooterDragon style={styles.decorativeLineIcon}/>
             </View>
         </View>
-    </View>
-    <Image style={styles.footerChild} resizeMode="cover"  source={require("../images/footer-dragon.png")} />
-    <FooterDragon style={styles.decorativeLineIcon} />
-</View>
     );
 };
 
@@ -116,8 +119,11 @@ const styles = StyleSheet.create({
         fontSize: 40,
         color: '#EBF166',
     },
-    footer: {
+    container: {
+        width: '100%',
         backgroundColor: "#32241b",
+    },
+    footer: {
         paddingVertical: 40,
         gap: 43,
         zIndex: 6,

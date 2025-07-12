@@ -2,6 +2,11 @@ import React from "react";
 import Index from "@/app/index";
 
 import * as Font from "expo-font";
+import {ScrollView} from "react-native";
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
+import MainPage from "@/assets/components/MainPage";
+import GameRulesPage from "@/assets/pages/GameRulesPage";
 
 export default class App extends React.Component {
 
@@ -13,6 +18,21 @@ export default class App extends React.Component {
     })
   }
   render() {
-    return <Index />;
+      const Stack = createStackNavigator();
+
+      function MyStack() {
+          return (
+              <Stack.Navigator>
+                  <Stack.Screen name="MainPage" component={MainPage} />
+                  <Stack.Screen name="GameRulesPage" component={GameRulesPage} />
+              </Stack.Navigator>
+          );
+      }
+
+    return (
+        <MyStack />
+    );
   }
 }
+
+

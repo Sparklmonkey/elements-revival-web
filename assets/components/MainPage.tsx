@@ -8,8 +8,8 @@ import GameDescription from "@/assets/components/GameDescription";
 import OtherGames from "@/assets/components/OtherGames";
 
 const Container = () => {
-
     return (
+        <ScrollView contentContainerStyle={{flex: 1}}>
         <View style={styles.container}>
             <View style={styles.view}>
                 <NavBar />
@@ -21,6 +21,7 @@ const Container = () => {
                 <Footer />
             </View>
         </View>
+        </ScrollView>
     );
 };
 
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        height: 250,
+        height: "100%",
         backgroundColor: "rgba(50, 17, 0, 1)",
         flex: 1
     },
