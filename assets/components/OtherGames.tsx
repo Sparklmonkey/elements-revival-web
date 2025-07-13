@@ -1,6 +1,6 @@
 import {FlatList, Image, ImageBackground, StyleSheet, Text, View} from "react-native";
-import LeftArrow from "@/assets/components/LeftArrow";
-import RightArrow from "@/assets/components/RightArrow";
+import LeftArrow from "@/assets/svg/LeftArrow";
+import RightArrow from "@/assets/svg/RightArrow";
 import * as React from "react";
 import GamePreviewCard from "@/assets/components/GamePreviewCard";
 

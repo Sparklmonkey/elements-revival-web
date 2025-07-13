@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from "react-native";
-import RuleCircle from "@/assets/components/RuleCircle";
+import RuleCircle from "@/assets/svg/RuleCircle";
 import * as React from "react";
 
 type RuleItemProps = {

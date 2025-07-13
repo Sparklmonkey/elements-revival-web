@@ -1,6 +1,5 @@
 import {Image, ImageBackground, Linking, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import * as React from "react";
-import required from "ajv/lib/vocabularies/validation/required";
 import {ImageSourcePropType} from "react-native/Libraries/Image/Image";
 
 type PreviewCardProps = {

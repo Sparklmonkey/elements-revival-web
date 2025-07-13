@@ -1,11 +1,11 @@
 ﻿import {Image, StyleSheet, Text, View} from "react-native";
-import Caretdown from "@/assets/components/caretdown";
+import Caretdown from "@/assets/svg/caretdown";
 import QuickLink from "@/assets/components/QuickLink";
 import * as React from "react";
-import InstagramIcon from "@/assets/components/InstagramIcon";
-import YoutubeIcon from "@/assets/components/YoutubeIcon";
-import FooterDragon from "@/assets/components/FooterDragon";
-import FooterDecor from "@/assets/components/FooterDecor";
+import InstagramIcon from "@/assets/svg/InstagramIcon";
+import YoutubeIcon from "@/assets/svg/YoutubeIcon";
+import FooterDragon from "@/assets/svg/FooterDragon";
+import FooterDecor from "@/assets/svg/FooterDecor";
 
 const Footer = () => {
 

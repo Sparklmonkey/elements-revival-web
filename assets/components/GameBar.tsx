@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Text, StyleSheet, View, ImageBackground, Image} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Caretdown from '@/assets/components/caretdown';
+import Caretdown from '@/assets/svg/caretdown';
 
 
 const GameBar = () => {

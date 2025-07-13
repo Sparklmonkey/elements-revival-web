@@ -1,7 +1,7 @@
 ﻿import * as React from "react";
 import {Text, StyleSheet, View, FlatList} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import RuleCircle from "./RuleCircle";
+import RuleCircle from "../svg/RuleCircle";
 import GameRuleItem from "@/assets/components/GameRuleItem";
 import GamePreviewCard from "@/assets/components/GamePreviewCard";
 

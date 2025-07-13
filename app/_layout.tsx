@@ -1,12 +1,12 @@
 import React from "react";
-import Index from "@/app/index";
 
 import * as Font from "expo-font";
 import {ScrollView} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-import MainPage from "@/assets/components/MainPage";
+import MainPage from "@/assets/pages/HomePage";
 import GameRulesPage from "@/assets/pages/GameRulesPage";
+import LeaderboardPage from "@/assets/pages/LeaderboardPage";
 
 export default class App extends React.Component {
 
@@ -22,9 +22,15 @@ export default class App extends React.Component {
 
       function MyStack() {
           return (
-              <Stack.Navigator>
+              <Stack.Navigator screenOptions={{
+                  headerShown: false,
+                  cardStyle: {
+                      flex: 1
+                  }
+              }}>
                   <Stack.Screen name="MainPage" component={MainPage} />
                   <Stack.Screen name="GameRulesPage" component={GameRulesPage} />
+                  <Stack.Screen name="LeaderboardPage" component={LeaderboardPage} />
               </Stack.Navigator>
           );
       }

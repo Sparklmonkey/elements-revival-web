@@ -1,7 +1,6 @@
 import * as React from "react";
-import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Caretdown from '@/assets/components/caretdown';
+import {Text, StyleSheet, View, TouchableOpacity, Linking} from "react-native";
+import Caretdown from '@/assets/svg/caretdown';
 import {
     createStaticNavigation,
     useNavigation,
@@ -10,13 +9,36 @@ import {
 const NavBar = () => {
     const navigation = useNavigation();
 
+    const wikiUrl = 'https://elementscommunity.org/wiki/Main_Page';
+    const forumUrl = 'https://elementscommunity.org/forum/index.php';
+
+
+    const openUrl = (url: string) => {
+        Linking.canOpenURL(url).then(supported => {
+            if (supported) {
+                Linking.openURL(url);
+            } else {
+                console.log("Don't know how to open URI: " + url);
+            }
+        });
+    };
+
     return (
         <View style={styles.navBar}>
             <View style={styles.groupFlexBox}>
-                <Text style={styles.elementsTheRevival}>Elements The Revival</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('MainPage')}>
+                    <Text style={styles.elementsTheRevival}>Elements The Revival</Text>
+                </TouchableOpacity>
                 <View style={styles.links}>
-                    <Text style={styles.wiki}>Wiki</Text>
-                    <Text style={styles.wiki}>Forum</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('LeaderboardPage')}>
+                        <Text style={styles.wiki}>Leaderboard</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => openUrl(wikiUrl)}>
+                        <Text style={styles.wiki}>Wiki</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => openUrl(forumUrl)}>
+                        <Text style={styles.wiki}>Forum</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('GameRulesPage')}>
                         <Text style={styles.wiki}>Game Rules</Text>
                     </TouchableOpacity>

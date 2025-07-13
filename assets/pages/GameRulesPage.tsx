@@ -1,18 +1,20 @@
 import NavBar from "@/assets/components/NavBar";
 import * as React from "react";
 import Footer from "@/assets/components/Footer";
-import {StyleSheet, View} from "react-native";
-import Container from "@/assets/components/MainPage";
+import {ScrollView, StyleSheet, View} from "react-native";
+import Container from "@/assets/pages/HomePage";
 import GameRules from "@/assets/components/GameRules";
 
 function GameRulesPage() {
     return (
         <View style={styles.container}>
+            <ScrollView contentContainerStyle={{flexGrow: 1}}>
             <View style={styles.view}>
                 <NavBar />
                 <GameRules />
                 <Footer />
             </View>
+            </ScrollView>
         </View>
     );
 }

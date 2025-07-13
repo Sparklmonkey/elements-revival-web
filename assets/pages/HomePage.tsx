@@ -6,22 +6,24 @@ import GameBar from "@/assets/components/GameBar";
 import Footer from "@/assets/components/Footer";
 import GameDescription from "@/assets/components/GameDescription";
 import OtherGames from "@/assets/components/OtherGames";
+import {useScrollToTop} from "@react-navigation/native";
+import {useRef} from "react";
 
-const Container = () => {
+const HomePage = () => {
     return (
-        <ScrollView contentContainerStyle={{flex: 1}}>
-        <View style={styles.container}>
-            <View style={styles.view}>
-                <NavBar />
-                <GameBar />
-                <BackgroundDragon />
-                <iframe style={styles.gameIconLayout} src="https://itch.io/embed-upload/14057874?color=333333" width="1237" height="600"><a href="https://sparklmonkey.itch.io/element-revival">Play Element Revival on itch.io</a></iframe>
-                <GameDescription />
-                <OtherGames />
-                <Footer />
+            <View style={styles.container}>
+                <ScrollView contentContainerStyle={{flexGrow: 1}}>
+                <View style={styles.view}>
+                    <NavBar />
+                    <GameBar />
+                    <BackgroundDragon />
+                    <iframe style={styles.gameIconLayout} src="https://itch.io/embed-upload/14057874?color=333333" width="1237" height="600"><a href="https://sparklmonkey.itch.io/element-revival">Play Element Revival on itch.io</a></iframe>
+                    <GameDescription />
+                    <OtherGames />
+                    <Footer />
+                </View>
+                </ScrollView>
             </View>
-        </View>
-        </ScrollView>
     );
 };
 
@@ -49,4 +51,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Container;
+export default HomePage;
