@@ -1,15 +1,12 @@
 ﻿import * as React from "react";
-import {Text, StyleSheet, View, FlatList} from "react-native";
-import WebLinearGradient from 'react-native-web-linear-gradient';
+import {Text, StyleSheet, View, FlatList, ScrollView} from "react-native";
 import SearchIcon from "@/assets/svg/SearchIcon";
 import FilterIcon from "@/assets/svg/FilterIcon";
-import OrderByIcon from "@/assets/svg/OrderByIcon";
-import LeaderboardFirstPlaceIcon from "@/assets/svg/LeaderboardFirstPlaceIcon";
-import LeaderboardSecondPlaceIcon from "@/assets/svg/LeaderboardSecondPlaceIcon";
-import LeaderboardThirdPlaceIcon from "@/assets/svg/LeaderboardThirdPlaceIcon";
-import LeaderboardItem from "@/assets/components/LeaderboardItem";
+import LeaderboardItem, { leaderboardItemProps } from "@/assets/components/LeaderboardItem";
 import LeaderboardHeader from "@/assets/components/LeaderboardHeader";
-import GameRuleItem from "@/assets/components/GameRuleItem";
+import NavBar from "@/assets/components/NavBar";
+import Footer from "@/assets/components/Footer";
+import {useState} from "react";
 
 const LeaderboardPage = () => {
 
@@ -23,7 +20,7 @@ const LeaderboardPage = () => {
             gold: "12134",
             wins: "1324",
             losses: "12",
-        },{
+        }, {
             rank: 2,
             username: "Serprex",
             overallScore: "1234",
@@ -32,7 +29,7 @@ const LeaderboardPage = () => {
             gold: "12134",
             wins: "1324",
             losses: "12",
-        },{
+        }, {
             rank: 3,
             username: "spex",
             overallScore: "1234",
@@ -41,47 +38,89 @@ const LeaderboardPage = () => {
             gold: "12134",
             wins: "1324",
             losses: "12",
+        }, {
+            rank: 4,
+            username: "spex",
+            overallScore: "1234",
+            seasonScore: "1234",
+            cardCollection: "1234",
+            gold: "12134",
+            wins: "1324",
+            losses: "12",
+        }, {
+            rank: 5,
+            username: "Buddy",
+            overallScore: "1234",
+            seasonScore: "1234",
+            cardCollection: "1234",
+            gold: "12134",
+            wins: "1324",
+            losses: "12",
         }
     ]
-    const leaderboardItem = {
-        rank: 3,
-        username: "TheGreat",
-        overallScore: "1234",
-        seasonScore: "1234",
-        cardCollection: "1234",
-        gold: "12134",
-        wins: "1324",
-        losses: "12",
+
+    React.useEffect(() => {
+        sortLeaderboard();
+    });
+
+    const [leaderboardArray, setLeaderboardArray] = useState<leaderboardItemProps[]>([]);
+    const [sortType, setSortType] = useState<keyof leaderboardItemProps>("username");
+    const [isDescending, setIsDescending] = useState<boolean>(true);
+
+    const updateSortType = (sortType: string) => {
+        setIsDescending((sortType as keyof leaderboardItemProps) === sortType ? !isDescending : true);
+        setSortType(sortType as keyof leaderboardItemProps);
     }
 
+    const sortLeaderboard = (leaboardParam: leaderboardItemProps[] = leaderboardList) => {
+        const sortArray = [...leaboardParam].sort((a: leaderboardItemProps, b: leaderboardItemProps) => {
+            if (isDescending) {
+                if (a[sortType] > b[sortType]) return 1;
+                else if (b[sortType] > a[sortType]) return -1;
+                return 0;
+            } else {
+                if (a[sortType] > b[sortType]) return -1;
+                else if (b[sortType] > a[sortType]) return 1;
+                return 0;
+            }
+        });
+
+        setLeaderboardArray(sortArray);
+    }
     return (
-            <View style={[styles.view, styles.viewSpaceBlock]}>
-                <Text style={styles.leaderboard}>Leaderboard</Text>
-                <View style={styles.searchBarParent}>
-                    <View style={[styles.searchBar, styles.searchBorder]}>
-                        <SearchIcon width={20} height={20} />
-                        <Text style={[styles.searchByUsername, styles.filterTypo]}>Search by username</Text>
-                    </View>
-                    <View style={[styles.searchBar1, styles.searchBorder]}>
-                        <FilterIcon style={styles.arrowsdownupIcon} width={20} height={20} />
-                        <Text style={[styles.filter, styles.filterTypo]}>Filter</Text>
-                    </View>
-                </View>
-                <View style={styles.text}>
-                    <View style={[styles.textParent, styles.titleFlexBox]}>
-                        <View style={[styles.text1, styles.textFlexBox]}>
-                            <LeaderboardHeader />
+        <View style={styles.container}>
+            <ScrollView contentContainerStyle={{flexGrow: 1}}>
+                    <NavBar/>
+                    <View style={[styles.view, styles.viewSpaceBlock]}>
+                        <Text style={styles.leaderboard}>Leaderboard</Text>
+                        <View style={styles.searchBarParent}>
+                            <View style={[styles.searchBar, styles.searchBorder]}>
+                                <SearchIcon width={20} height={20}/>
+                                <Text style={[styles.searchByUsername, styles.filterTypo]}>Search by username</Text>
+                            </View>
+                            <View style={[styles.searchBar1, styles.searchBorder]}>
+                                <FilterIcon style={styles.arrowsdownupIcon} width={20} height={20}/>
+                                <Text style={[styles.filter, styles.filterTypo]}>Filter</Text>
+                            </View>
                         </View>
-                        <View style={styles.textGroup}>
-                            <FlatList
-                                contentContainerStyle={{ gap: 16 }}
-                                data={leaderboardList}
-                                renderItem={({item}) => <LeaderboardItem {...item}  />}
-                                keyExtractor={item => item.rank.toString()} />
+                        <View style={styles.text}>
+                            <View style={[styles.textParent, styles.titleFlexBox]}>
+                                <View style={[styles.text1, styles.textFlexBox]}>
+                                    <LeaderboardHeader updateOrderBy={updateSortType} />
+                                </View>
+                                <View style={styles.textGroup}>
+                                    <FlatList
+                                        contentContainerStyle={{gap: 8}}
+                                        data={leaderboardArray}
+                                        renderItem={({item}) => <LeaderboardItem {...item}  />}
+                                        keyExtractor={item => item.rank.toString()}/>
+                                </View>
+                            </View>
                         </View>
                     </View>
-                </View>
-            </View>
+                    <Footer/>
+            </ScrollView>
+        </View>
     );
 };
 
@@ -92,6 +131,7 @@ const styles = StyleSheet.create({
     },
     viewSpaceBlock: {
         padding: 24,
+        marginHorizontal: 36,
         borderRadius: 16
     },
     searchBorder: {
@@ -105,6 +145,12 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderStyle: "solid"
     },
+    container: {
+        height: 250,
+        width: '100%',
+        backgroundColor: "rgba(50, 17, 0, 1)",
+        flex: 1
+    },
     filterTypo: {
         textAlign: "left",
         fontSize: 16,
@@ -116,6 +162,7 @@ const styles = StyleSheet.create({
         alignSelf: "stretch"
     },
     textFlexBox: {
+        paddingHorizontal: 6,
         justifyContent: "center",
         borderRadius: 8,
         alignSelf: "stretch"
@@ -218,7 +265,7 @@ const styles = StyleSheet.create({
         alignSelf: "stretch"
     },
     view: {
-        width: "100%",
+        margin: 32,
         borderColor: "#d38030",
         gap: 32,
         borderWidth: 2,

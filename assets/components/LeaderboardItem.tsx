@@ -5,7 +5,7 @@ import * as React from "react";
 import LeaderboardSecondPlaceIcon from "@/assets/svg/LeaderboardSecondPlaceIcon";
 import LeaderboardThirdPlaceIcon from "@/assets/svg/LeaderboardThirdPlaceIcon";
 
-type leaderboardItemProps = {
+export type leaderboardItemProps = {
     rank: number;
     username: string;
     overallScore: string;
@@ -59,7 +59,7 @@ const LeaderboardItem = (props: leaderboardItemProps) => {
 
 const styles = StyleSheet.create({
     rankContainer: {
-        width: "6%",
+        width: "10%",
         paddingVertical: 8,
         paddingHorizontal: 0,
         gap: 8,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         gap: 8,
         alignItems: "center",
-        width: "12%",
+        width: "10%",
         flexDirection: "row",
         justifyContent: "center",
     },
@@ -85,14 +85,12 @@ const styles = StyleSheet.create({
         backgroundColor: "transparent",
         justifyContent: "center",
         borderRadius: 8,
-        alignSelf: "stretch"
     },
     container: {
         alignItems: "center",
         alignContent: "space-evenly",
         gap: 24,
         flexDirection: "row",
-        alignSelf: "stretch"
     },
     otherHeader: {
         width: "100%",
@@ -105,74 +103,11 @@ const styles = StyleSheet.create({
         fontWeight: "600"
     },
     text: {
-        width: "12%",
         flex: 1,
         color: "#fff",
         lineHeight: 20,
         letterSpacing: 0.2,
         textAlign: "center",
-        fontSize: 16,
-        fontFamily: "Gill Sans",
-        fontWeight: "600"
-    },
-    username1: {
-    },
-    text3: {
-        flex: 1,
-        color: "#fff",
-        lineHeight: 20,
-        letterSpacing: 0.2,
-        textAlign: "left",
-        fontSize: 16,
-        fontFamily: "Gill Sans",
-        fontWeight: "600"
-    },
-    text4: {
-        flex: 1,
-        color: "#fff",
-        lineHeight: 20,
-        letterSpacing: 0.2,
-        textAlign: "left",
-        fontSize: 16,
-        fontFamily: "Gill Sans",
-        fontWeight: "600"
-    },
-    text5: {
-        flex: 1,
-        color: "#fff",
-        lineHeight: 20,
-        letterSpacing: 0.2,
-        textAlign: "left",
-        fontSize: 16,
-        fontFamily: "Gill Sans",
-        fontWeight: "600"
-    },
-    text6: {
-        flex: 1,
-        color: "#fff",
-        lineHeight: 20,
-        letterSpacing: 0.2,
-        textAlign: "left",
-        fontSize: 16,
-        fontFamily: "Gill Sans",
-        fontWeight: "600"
-    },
-    text7: {
-        flex: 1,
-        color: "#fff",
-        lineHeight: 20,
-        letterSpacing: 0.2,
-        textAlign: "left",
-        fontSize: 16,
-        fontFamily: "Gill Sans",
-        fontWeight: "600"
-    },
-    text8: {
-        flex: 1,
-        color: "#fff",
-        lineHeight: 20,
-        letterSpacing: 0.2,
-        textAlign: "left",
         fontSize: 16,
         fontFamily: "Gill Sans",
         fontWeight: "600"

@@ -1,42 +1,48 @@
-﻿import {StyleSheet, View, Text} from "react-native";
+﻿import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
 import OrderByIcon from "@/assets/svg/OrderByIcon";
+import {leaderboardItemProps} from "@/assets/components/LeaderboardItem";
+import {Dispatch, SetStateAction} from "react";
 
-const LeaderboardHeader = () => {
+interface LeaderboardHeaderProps {
+    updateOrderBy: (sortType: string) => void;
+};
+
+const LeaderboardHeader = (props:LeaderboardHeaderProps) => {
 
     return (
         <View style={[styles.title]}>
-            <View style={styles.rankContainer}>
-                <Text style={styles.rank}>Rank</Text>
+                <TouchableOpacity style={styles.parentSpaceBlock} onPress={() => props.updateOrderBy("rank")}>
+                <Text style={styles.headerText}>Rank</Text>
                 <OrderByIcon width={16} height={16}/>
-            </View>
-            <View style={[styles.usernameParent, styles.parentSpaceBlock]}>
-                <Text style={styles.otherHeader}>Username</Text>
+            </TouchableOpacity>
+                <TouchableOpacity style={styles.parentSpaceBlock} onPress={() => props.updateOrderBy("username")}>
+                  <Text style={styles.headerText}>Username</Text>
+                   <OrderByIcon width={16} height={16}/>
+                 </TouchableOpacity>
+                <TouchableOpacity style={styles.parentSpaceBlock} onPress={() => props.updateOrderBy("overallScore")}>
+                    <Text style={styles.headerText}>Overall Score</Text>
+                    <OrderByIcon width={16} height={16}/>
+                </TouchableOpacity>
+            <TouchableOpacity style={styles.parentSpaceBlock} onPress={() => props.updateOrderBy("seasonScore")}>
+                <Text style={styles.headerText}>Season Score</Text>
                 <OrderByIcon width={16} height={16}/>
-            </View>
-            <View style={styles.parentSpaceBlock}>
-                <Text style={styles.otherHeader}>Overall Score</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.parentSpaceBlock} onPress={() => props.updateOrderBy("cardCollection")}>
+                <Text style={styles.headerText}>Card Collection</Text>
                 <OrderByIcon width={16} height={16}/>
-            </View>
-            <View style={styles.parentSpaceBlock}>
-                <Text style={styles.otherHeader}>Season Score</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.parentSpaceBlock} onPress={() => props.updateOrderBy("gold")}>
+                <Text style={styles.headerText}>Gold</Text>
                 <OrderByIcon width={16} height={16}/>
-            </View>
-            <View style={styles.parentSpaceBlock}>
-                <Text style={styles.otherHeader}>Card Collection</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.parentSpaceBlock} onPress={() => props.updateOrderBy("wins")}>
+                <Text style={styles.headerText}>Wins</Text>
                 <OrderByIcon width={16} height={16}/>
-            </View>
-            <View style={styles.parentSpaceBlock}>
-                <Text style={styles.otherHeader}>Gold</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.parentSpaceBlock} onPress={() => props.updateOrderBy("losses")}>
+                <Text style={styles.headerText}>Losses</Text>
                 <OrderByIcon width={16} height={16}/>
-            </View>
-            <View style={styles.parentSpaceBlock}>
-                <Text style={styles.otherHeader}>Wins</Text>
-                <OrderByIcon width={16} height={16}/>
-            </View>
-            <View style={styles.parentSpaceBlock}>
-                <Text style={styles.otherHeader}>Losses</Text>
-                <OrderByIcon width={16} height={16}/>
-            </View>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -48,24 +54,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 0
     },
     title: {
+        width: '100%',
         alignContent: 'space-between',
-        height: 32,
         alignItems: "center",
-        gap: 24,
+        gap: 8,
         flexDirection: "row",
     },
     rankContainer: {
-        borderWidth: 2,
-        borderColor: "#d5ce7ba0",
-        borderRadius: 16,
-        width: "6%",
-        paddingVertical: 8,
-        paddingHorizontal: 0,
-        gap: 8,
-        alignItems: "center",
-        flexDirection: "row",
-    },
-    parentSpaceBlock: {
+        flex: 1,
         borderWidth: 2,
         borderColor: "#d5ce7ba0",
         borderRadius: 16,
@@ -73,21 +69,23 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         gap: 8,
         alignItems: "center",
-        width: "12%",
         flexDirection: "row",
         justifyContent: "center",
     },
-    rank: {
-        width: 70,
-        color: "#d5ce7b",
-        lineHeight: 20,
-        letterSpacing: 0.2,
-        textAlign: "center",
-        fontSize: 16,
-        fontFamily: "Gill Sans",
-        fontWeight: "600"
+    parentSpaceBlock: {
+        width: '10%',
+        borderWidth: 2,
+        borderColor: "#d5ce7ba0",
+        borderRadius: 16,
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        gap: 8,
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "center",
+        flex: 1,
     },
-    otherHeader: {
+    headerText: {
         width: "100%",
         color: "#d5ce7b",
         lineHeight: 20,
