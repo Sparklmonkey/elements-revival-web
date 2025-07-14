@@ -27,7 +27,7 @@ const NavBar = () => {
         <View style={styles.navBar}>
             <View style={styles.groupFlexBox}>
                 <TouchableOpacity onPress={() => navigation.navigate('MainPage')}>
-                    <Text style={styles.elementsTheRevival}>Elements The Revival</Text>
+                    <Text style={styles.elementsTheRevival}></Text>
                 </TouchableOpacity>
                 <View style={styles.links}>
                     <TouchableOpacity onPress={() => navigation.navigate('LeaderboardPage')}>

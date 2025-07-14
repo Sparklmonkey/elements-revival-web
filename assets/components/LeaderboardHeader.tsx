@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.2,
         textAlign: "center",
         fontSize: 16,
-        fontFamily: "Gill Sans",
+        fontFamily: "gillSans",
         fontWeight: "600"
     },
 });

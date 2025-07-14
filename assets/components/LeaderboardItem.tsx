@@ -8,12 +8,12 @@ import LeaderboardThirdPlaceIcon from "@/assets/svg/LeaderboardThirdPlaceIcon";
 export type leaderboardItemProps = {
     rank: number;
     username: string;
-    overallScore: string;
-    seasonScore: string;
-    cardCollection: string;
-    gold: string;
-    wins: string;
-    losses: string;
+    overallScore: number;
+    seasonScore: number;
+    cardCollection: number;
+    gold: number;
+    wins: number;
+    losses: number;
 }
 
 const LeaderboardItem = (props: leaderboardItemProps) => {
@@ -75,10 +75,10 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 16,
         gap: 8,
-        alignItems: "center",
         width: "10%",
         flexDirection: "row",
         justifyContent: "center",
+        flex: 1,
     },
     gradientContainer: {
         padding: 16,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.2,
         textAlign: "center",
         fontSize: 16,
-        fontFamily: "Gill Sans",
+        fontFamily: "gillSans",
         fontWeight: "600"
     },
     text: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.2,
         textAlign: "center",
         fontSize: 16,
-        fontFamily: "Gill Sans",
+        fontFamily: "gillSans",
         fontWeight: "600"
     },
 });

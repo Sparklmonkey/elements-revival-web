@@ -1,137 +1,156 @@
 ﻿import * as React from "react";
 import {Text, StyleSheet, View, FlatList, ScrollView} from "react-native";
-import SearchIcon from "@/assets/svg/SearchIcon";
-import FilterIcon from "@/assets/svg/FilterIcon";
-import LeaderboardItem, { leaderboardItemProps } from "@/assets/components/LeaderboardItem";
+import LeaderboardItem, {leaderboardItemProps} from "@/assets/components/LeaderboardItem";
 import LeaderboardHeader from "@/assets/components/LeaderboardHeader";
 import NavBar from "@/assets/components/NavBar";
 import Footer from "@/assets/components/Footer";
 import {useEffect, useState} from "react";
+import axios from 'axios';
+import {useDispatch, useSelector} from "react-redux";
+import {
+    pageAuthenticated,
+    updateAccessToken,
+    updateOverallLeaderboard,
+    updateSeasonalLeaderboard
+} from "@/assets/store/pageAuthenticationAction";
+import LeaderboardSearchBar from "@/assets/components/LeaderboardSearchBar";
 
 const LeaderboardPage = () => {
 
-    const leaderboardList = [
-        {
-            rank: 1,
-            username: "TheGreat",
-            overallScore: "1234",
-            seasonScore: "1234",
-            cardCollection: "1234",
-            gold: "12134",
-            wins: "1324",
-            losses: "12",
-        }, {
-            rank: 2,
-            username: "Serprex",
-            overallScore: "1234",
-            seasonScore: "1234",
-            cardCollection: "1234",
-            gold: "12134",
-            wins: "1324",
-            losses: "12",
-        }, {
-            rank: 3,
-            username: "spex",
-            overallScore: "1234",
-            seasonScore: "1234",
-            cardCollection: "1234",
-            gold: "12134",
-            wins: "1324",
-            losses: "12",
-        }, {
-            rank: 4,
-            username: "spex",
-            overallScore: "1234",
-            seasonScore: "1234",
-            cardCollection: "1234",
-            gold: "12134",
-            wins: "1324",
-            losses: "12",
-        }, {
-            rank: 5,
-            username: "Buddy",
-            overallScore: "1234",
-            seasonScore: "1234",
-            cardCollection: "1234",
-            gold: "12134",
-            wins: "1324",
-            losses: "12",
-        }
-    ]
-
-     useEffect(() =>  {
-        sortLeaderboard();
-    });
+    const basicAuthToken: string = useSelector(state => state.pageData.basicAuthToken);
+    const accessToken: string = useSelector(state => state.pageData.accessToken);
+    const overallBoard: leaderboardItemProps[] = useSelector(state => state.pageData.overallLeaderboard);
+    const seasonalBoard: leaderboardItemProps[] = useSelector(state => state.pageData.seasonalLeaderboard);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getLeaderboard();
-    }, [])
-    function getLeaderboard() {
-        return fetch('https://services.api.unity.com/auth/v1/token-exchange?projectId=ec77d6b3-4d48-4c2c-a1d4-f84f9dac7aaa&environmentId=80206c0b-5c1b-428e-8935-1132903075c2')
-            .then(response => console.log(response.json()))
-            .then(json => {
-                return json
-            })
-            .catch(error => {
-                console.error(error);
+        authenticate()
+            .then(bearerToken => {
+                getLeaderboardData(bearerToken ?? "", true).then(response => {
+                    console.log(response.output.leaderboardResponse);
+                    setLeaderboardArray(response.output.leaderboardResponse);
+                    dispatch(updateOverallLeaderboard(response.output.leaderboardResponse));
+                    getLeaderboardData(bearerToken ?? "", false).then(response => {
+                        console.log(response.output.leaderboardResponse);
+                        dispatch(updateSeasonalLeaderboard(response.output.leaderboardResponse));
+                    })
+                });
             });
+    }, []);
+
+    function searchByUsername(username: string) {
+
     }
+
+    async function getScoreboardByUsername(username: string) {
+        const userData = leaderboardArray.find(item => item.username === username);
+        if (userData) {
+            setLeaderboardArray([userData]);
+        } else {
+            setLeaderboardArray(overallBoard);
+            alert("No user data found.");
+        }
+    }
+
+    function changeLeaderboard(isOverall: boolean) {
+        if (isOverall) {
+            setLeaderboardArray(overallBoard);
+        } else {
+            setLeaderboardArray(seasonalBoard);
+        }
+    }
+    async function getLeaderboardData(bearerToken: string, isOverall: boolean) {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': bearerToken
+        }
+        try {
+            const {data} = await axios.post(
+                'https://cloud-code.services.api.unity.com/v1/projects/ec77d6b3-4d48-4c2c-a1d4-f84f9dac7aaa/scripts/test-get-player',
+                {
+                    "params": {
+                        "isOverall": isOverall
+                    }
+                },
+                {headers: headers});
+            return data;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    async function authenticate() {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': basicAuthToken
+        }
+        try {
+            const {data} = await axios.post(
+                'https://services.api.unity.com/auth/v1/token-exchange?projectId=ec77d6b3-4d48-4c2c-a1d4-f84f9dac7aaa&environmentId=80206c0b-5c1b-428e-8935-1132903075c2',
+                {},
+                {headers: headers});
+            const bearerToken = 'Bearer ' + data.accessToken;
+            dispatch(updateAccessToken(bearerToken));
+            dispatch(pageAuthenticated());
+            return bearerToken;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
     const [leaderboardArray, setLeaderboardArray] = useState<leaderboardItemProps[]>([]);
     const [sortType, setSortType] = useState<keyof leaderboardItemProps>("username");
     const [isDescending, setIsDescending] = useState<boolean>(true);
 
-    const updateSortType = (sortType: string) => {
-        setIsDescending((sortType as keyof leaderboardItemProps) === sortType ? !isDescending : true);
-        setSortType(sortType as keyof leaderboardItemProps);
+    const updateSortType = (newType: string) => {
+        const newDescending: boolean = (newType as keyof leaderboardItemProps) === sortType ? !isDescending : true;
+        setIsDescending(newDescending);
+        setSortType(newType as keyof leaderboardItemProps);
+        sortLeaderboard(newType as keyof leaderboardItemProps, newDescending);
     }
 
-    const sortLeaderboard = (leaboardParam: leaderboardItemProps[] = leaderboardList) => {
-        const sortArray = [...leaboardParam].sort((a: leaderboardItemProps, b: leaderboardItemProps) => {
-            if (isDescending) {
-                if (a[sortType] > b[sortType]) return 1;
-                else if (b[sortType] > a[sortType]) return -1;
-                return 0;
-            } else {
-                if (a[sortType] > b[sortType]) return -1;
-                else if (b[sortType] > a[sortType]) return 1;
-                return 0;
+    const sortLeaderboard = (newType: keyof leaderboardItemProps, newDescending: boolean) => {
+        let sortArray: leaderboardItemProps[] = [];
+        if (newType === 'username') {
+            sortArray = leaderboardArray.sort((a, b) => a.username.localeCompare(b.username));
+            if (!newDescending) {
+                sortArray = sortArray.reverse();
             }
-        });
-
+        } else {
+            sortArray = leaderboardArray.sort((a, b) => a[newType] > b[newType] ? 1 : -1)
+            if (!newDescending) {
+                sortArray = sortArray.reverse();
+            }
+        }
         setLeaderboardArray(sortArray);
-    }
+    };
+
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{flexGrow: 1}}>
-                    <NavBar/>
-                    <View style={[styles.view, styles.viewSpaceBlock]}>
-                        <Text style={styles.leaderboard}>Leaderboard</Text>
-                        <View style={styles.searchBarParent}>
-                            <View style={[styles.searchBar, styles.searchBorder]}>
-                                <SearchIcon width={20} height={20}/>
-                                <Text style={[styles.searchByUsername, styles.filterTypo]}>Search by username</Text>
+                <NavBar/>
+                <View style={[styles.view, styles.viewSpaceBlock]}>
+                    <Text style={styles.leaderboard}>Leaderboard</Text>
+                    <Text style={styles.leaderboard}>Currently the leaderboard is limited to show the top 50 of each type, due to limitations</Text>
+                    <LeaderboardSearchBar leaderboardType={changeLeaderboard} searchByUsername={getScoreboardByUsername} />
+                    <View style={styles.text}>
+                        <View style={[styles.textParent, styles.titleFlexBox]}>
+                            <View style={[styles.text1, styles.textFlexBox]}>
+                                <LeaderboardHeader updateOrderBy={updateSortType}/>
                             </View>
-                            <View style={[styles.searchBar1, styles.searchBorder]}>
-                                <FilterIcon style={styles.arrowsdownupIcon} width={20} height={20}/>
-                                <Text style={[styles.filter, styles.filterTypo]}>Filter</Text>
-                            </View>
-                        </View>
-                        <View style={styles.text}>
-                            <View style={[styles.textParent, styles.titleFlexBox]}>
-                                <View style={[styles.text1, styles.textFlexBox]}>
-                                    <LeaderboardHeader updateOrderBy={updateSortType} />
-                                </View>
-                                <View style={styles.textGroup}>
-                                    <FlatList
-                                        contentContainerStyle={{gap: 8}}
-                                        data={leaderboardArray}
-                                        renderItem={({item}) => <LeaderboardItem {...item}  />}
-                                        keyExtractor={item => item.rank.toString()}/>
-                                </View>
+                            <View style={styles.textGroup}>
+                                <FlatList
+                                    contentContainerStyle={{gap: 8}}
+                                    data={leaderboardArray}
+                                    renderItem={({item}) => <LeaderboardItem {...item}  />}
+                                    keyExtractor={item => item.rank.toString()}/>
                             </View>
                         </View>
                     </View>
-                    <Footer/>
+                </View>
+                <Footer/>
             </ScrollView>
         </View>
     );

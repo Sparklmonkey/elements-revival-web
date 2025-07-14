@@ -7,6 +7,8 @@ import {createStackNavigator} from "@react-navigation/stack";
 import MainPage from "@/assets/pages/HomePage";
 import GameRulesPage from "@/assets/pages/GameRulesPage";
 import LeaderboardPage from "@/assets/pages/LeaderboardPage";
+import {Provider} from "react-redux";
+import {store} from "@/assets/store/store";
 
 export default class App extends React.Component {
 
@@ -22,16 +24,19 @@ export default class App extends React.Component {
 
       function MyStack() {
           return (
-              <Stack.Navigator screenOptions={{
-                  headerShown: false,
-                  cardStyle: {
-                      flex: 1
-                  }
-              }}>
-                  <Stack.Screen name="MainPage" component={MainPage} />
-                  <Stack.Screen name="GameRulesPage" component={GameRulesPage} />
-                  <Stack.Screen name="LeaderboardPage" component={LeaderboardPage} />
-              </Stack.Navigator>
+              <Provider store={store}>
+                  <Stack.Navigator screenOptions={{
+                      headerShown: false,
+                      cardStyle: {
+                          flex: 1
+                      }
+                  }}>
+                      <Stack.Screen name="MainPage" component={MainPage} />
+                      <Stack.Screen name="GameRulesPage" component={GameRulesPage} />
+                      <Stack.Screen name="LeaderboardPage" component={LeaderboardPage} />
+                  </Stack.Navigator>
+              </Provider>
+
           );
       }
 
