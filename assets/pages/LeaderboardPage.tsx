@@ -6,7 +6,7 @@ import LeaderboardItem, { leaderboardItemProps } from "@/assets/components/Leade
 import LeaderboardHeader from "@/assets/components/LeaderboardHeader";
 import NavBar from "@/assets/components/NavBar";
 import Footer from "@/assets/components/Footer";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const LeaderboardPage = () => {
 
@@ -59,10 +59,23 @@ const LeaderboardPage = () => {
         }
     ]
 
-    React.useEffect(() => {
+     useEffect(() =>  {
         sortLeaderboard();
     });
 
+    useEffect(() => {
+        getLeaderboard();
+    }, [])
+    function getLeaderboard() {
+        return fetch('https://services.api.unity.com/auth/v1/token-exchange?projectId=ec77d6b3-4d48-4c2c-a1d4-f84f9dac7aaa&environmentId=80206c0b-5c1b-428e-8935-1132903075c2')
+            .then(response => console.log(response.json()))
+            .then(json => {
+                return json
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
     const [leaderboardArray, setLeaderboardArray] = useState<leaderboardItemProps[]>([]);
     const [sortType, setSortType] = useState<keyof leaderboardItemProps>("username");
     const [isDescending, setIsDescending] = useState<boolean>(true);
