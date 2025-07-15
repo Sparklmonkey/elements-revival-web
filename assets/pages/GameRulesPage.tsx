@@ -21,7 +21,6 @@ function GameRulesPage() {
 
 const styles = StyleSheet.create({
     view: {
-        height: 2237,
         gap: 40,
         alignItems: "center",
         overflow: "hidden",
@@ -30,7 +29,6 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        height: 250,
         backgroundColor: "rgba(50, 17, 0, 1)",
         flex: 1
     },

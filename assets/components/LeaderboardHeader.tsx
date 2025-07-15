@@ -1,7 +1,5 @@
 ﻿import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
 import OrderByIcon from "@/assets/svg/OrderByIcon";
-import {leaderboardItemProps} from "@/assets/components/LeaderboardItem";
-import {Dispatch, SetStateAction} from "react";
 
 interface LeaderboardHeaderProps {
     updateOrderBy: (sortType: string) => void;

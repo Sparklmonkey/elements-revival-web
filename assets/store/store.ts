@@ -1,18 +1,12 @@
-import { createStore, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit'
 import pageReducer from "@/assets/store/pageReducer";
-import {leaderboardItemProps} from "@/assets/components/LeaderboardItem";
-export type PageData = {
-    isAuthenticated: boolean,
-    accessToken: string,
-    basicAuthToken: string,
-    projectId: string,
-    environmentId: string,
-    overallLeaderboard: leaderboardItemProps[],
-    seasonalLeaderboard: leaderboardItemProps[]
-}
 
-const rootReducer = combineReducers({
-    pageData: pageReducer,
+export const store = configureStore({
+    reducer: {
+        pageData: pageReducer
+    },
 })
 
-export const store = createStore(rootReducer);
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch

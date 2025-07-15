@@ -5,9 +5,11 @@ import {
     createStaticNavigation, StackActions,
     useNavigation,
 } from '@react-navigation/native';
-
+import {useDispatch} from "react-redux";
+import {updateShouldShowUnity} from "@/assets/store/pageReducer";
 
 const NavBar = () => {
+    const dispatch = useDispatch();
     const navigation = useNavigation();
 
     const wikiUrl = 'https://elementscommunity.org/wiki/Main_Page';
@@ -25,6 +27,7 @@ const NavBar = () => {
     };
 
     const navigateTo = (route: string) => {
+        dispatch(updateShouldShowUnity(route === "HomePage"));
         navigation.dispatch(
             StackActions.replace(route)
         );
@@ -33,7 +36,7 @@ const NavBar = () => {
     return (
         <View style={styles.navBar}>
             <View style={styles.groupFlexBox}>
-                <TouchableOpacity onPress={() => navigateTo('MainPage')}>
+                <TouchableOpacity onPress={() => navigateTo('HomePage')}>
                     <Text style={styles.elementsTheRevival}>Elements the Revival</Text>
                 </TouchableOpacity>
                 <View style={styles.links}>

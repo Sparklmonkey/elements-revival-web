@@ -7,32 +7,31 @@ import Footer from "@/assets/components/Footer";
 import {useEffect, useState} from "react";
 import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux";
-import {
-    pageAuthenticated,
-    updateAccessToken,
-    updateOverallLeaderboard,
-    updateSeasonalLeaderboard
-} from "@/assets/store/pageAuthenticationAction";
 import LeaderboardSearchBar from "@/assets/components/LeaderboardSearchBar";
+import {RootState} from "@/assets/store/store";
+import {
+    setAccessToken,
+    setAuthenticated,
+    setOverallLeaderboard,
+    setSeasonalLeaderboard
+} from "@/assets/store/pageReducer";
 
 const LeaderboardPage = () => {
 
-    const basicAuthToken: string = useSelector(state => state.pageData.basicAuthToken);
-    const accessToken: string = useSelector(state => state.pageData.accessToken);
-    const overallBoard: leaderboardItemProps[] = useSelector(state => state.pageData.overallLeaderboard);
-    const seasonalBoard: leaderboardItemProps[] = useSelector(state => state.pageData.seasonalLeaderboard);
+    const basicAuthToken: string = useSelector((state: RootState) => state.pageData.basicAuthToken);
+    const accessToken: string = useSelector((state: RootState) => state.pageData.accessToken);
+    const overallBoard: leaderboardItemProps[] = useSelector((state: RootState) => state.pageData.overallLeaderboard);
+    const seasonalBoard: leaderboardItemProps[] = useSelector((state: RootState) => state.pageData.seasonalLeaderboard);
     const dispatch = useDispatch();
 
     useEffect(() => {
         authenticate()
             .then(bearerToken => {
                 getLeaderboardData(bearerToken ?? "", true).then(response => {
-                    console.log(response.output.leaderboardResponse);
                     setLeaderboardArray(response.output.leaderboardResponse);
-                    dispatch(updateOverallLeaderboard(response.output.leaderboardResponse));
+                    dispatch(setOverallLeaderboard(response.output.leaderboardResponse));
                     getLeaderboardData(bearerToken ?? "", false).then(response => {
-                        console.log(response.output.leaderboardResponse);
-                        dispatch(updateSeasonalLeaderboard(response.output.leaderboardResponse));
+                        dispatch(setSeasonalLeaderboard(response.output.leaderboardResponse));
                     })
                 });
             });
@@ -88,8 +87,8 @@ const LeaderboardPage = () => {
                 {},
                 {headers: headers});
             const bearerToken = 'Bearer ' + data.accessToken;
-            dispatch(updateAccessToken(bearerToken));
-            dispatch(pageAuthenticated());
+            dispatch(setAccessToken(bearerToken));
+            dispatch(setAuthenticated());
             return bearerToken;
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -100,14 +99,14 @@ const LeaderboardPage = () => {
     const [sortType, setSortType] = useState<keyof leaderboardItemProps>("username");
     const [isDescending, setIsDescending] = useState<boolean>(true);
 
-    const updateSortType = (newType: string) => {
+    function updateSortType (newType: string) {
         const newDescending: boolean = (newType as keyof leaderboardItemProps) === sortType ? !isDescending : true;
         setIsDescending(newDescending);
         setSortType(newType as keyof leaderboardItemProps);
         sortLeaderboard(newType as keyof leaderboardItemProps, newDescending);
     }
 
-    const sortLeaderboard = (newType: keyof leaderboardItemProps, newDescending: boolean) => {
+    function sortLeaderboard(newType: keyof leaderboardItemProps, newDescending: boolean) {
         let sortArray: leaderboardItemProps[] = [];
         if (newType === 'username') {
             sortArray = leaderboardArray.sort((a, b) => a.username.localeCompare(b.username));

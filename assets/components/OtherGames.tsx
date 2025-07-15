@@ -13,7 +13,7 @@ const OtherGamesList = [
         description: 'OpenETG is a fast-paced, strategic online collectible card game where you build custom decks and battle against players or AI using the forces of nature and magic. I',
     },
     {
-        id: '0',
+        id: '1',
         title: 'openEtG',
         pageUrl: 'https://etg.dek.im/',
         imageUrl: require('../images/game-preview.png'),
