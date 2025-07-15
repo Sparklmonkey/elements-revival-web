@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import SearchIcon from "@/assets/svg/SearchIcon";
 import FilterIcon from "@/assets/svg/FilterIcon";
 import * as React from "react";
@@ -30,10 +30,14 @@ const LeaderboardSearchBar = (props: LeaderboardSearchBarProps) => {
             </View>
             <View style={styles.leaderboardTypeContainer}>
                 <TouchableOpacity style={styles.leaderboardTypeButton} onPress={() => props.leaderboardType(true)}>
-                    <Text style={styles.leaderboardTypeText}>Overall</Text>
+                    <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
+                        <Text style={styles.trainer}>Overall</Text>
+                    </ImageBackground>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.leaderboardTypeButton} onPress={() => props.leaderboardType(false)}>
-                    <Text style={styles.leaderboardTypeText}>Seasonal</Text>
+                    <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
+                        <Text style={styles.trainer}>Seasonal</Text>
+                    </ImageBackground>
                 </TouchableOpacity>
             </View>
             <View style={styles.filterButton}>
@@ -45,6 +49,20 @@ const LeaderboardSearchBar = (props: LeaderboardSearchBarProps) => {
 };
 
 const styles = StyleSheet.create({
+    trainer: {
+        fontSize: 24,
+        textAlign: "left",
+        fontFamily: "dauphin",
+        color: '#EBF166',
+    },
+    buttonIcon: {
+        width: '100%',
+        height: '100%',
+        paddingVertical: 9,
+        justifyContent: "center",
+        flexDirection: "row",
+        alignItems: "center"
+    },
     searchBarParent: {
         justifyContent: "space-between",
         gap: 0,
@@ -103,16 +121,12 @@ const styles = StyleSheet.create({
     },
     leaderboardTypeButton: {
         width: "25%",
-        backgroundColor: "#d5ce7b",
         gap: 8,
         padding: 6,
-        borderColor: "#d5ce7b",
-        borderRadius: 8,
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
         flexDirection: "row",
-        borderWidth: 2,
         borderStyle: "solid"
     },
     leaderboardTypeText: {

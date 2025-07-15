@@ -32,9 +32,8 @@ Each Elemental creates a deck of cards based around their core element to fight 
 
 const styles = StyleSheet.create({
     aboutGame: {
-        width: 1202,
-        height: 524,
-        zIndex: 4,
+        marginTop: 36,
+        width: '70%',
         borderRadius: 16,
         gap: 24,
         padding: 24,

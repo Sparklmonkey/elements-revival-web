@@ -34,6 +34,7 @@
     "expo-symbols": "~0.4.5",
     "expo-system-ui": "~5.0.10",
     "expo-web-browser": "~14.2.0",
+    "firebase": "^11.10.0",
     "modern-screenshot": "^4.6.5",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -58,6 +59,7 @@
     "gh-pages": "^6.3.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-web-linear-gradient": "^1.1.2",
+    "react-unity-webgl": "^9.9.0",
     "typescript": "~5.8.3"
   },
   "private": true

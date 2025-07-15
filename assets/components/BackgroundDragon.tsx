@@ -40,12 +40,13 @@ const styles = StyleSheet.create({
             {scaleX: -1}]
     },
     container: {
+        position: 'absolute',
         width: '100%',
         zIndex: -1,
         flexDirection: 'row',
         justifyContent: 'center',
         paddingHorizontal: '5%',
         paddingTop: 0,
-        marginTop: -175
+        top: 75
     }
 })

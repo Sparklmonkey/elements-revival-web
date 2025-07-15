@@ -121,6 +121,8 @@ const styles = StyleSheet.create({
     },
     container: {
         width: '100%',
+        flex: 1,
+        marginHorizontal: 12,
         backgroundColor: "#32241b",
     },
     footer: {
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
         overflow: "hidden"
     },
     container1: {
-        width: 1161,
+        width: '100%',
         flexDirection: "row",
         zIndex: 0,
         gap: 0,

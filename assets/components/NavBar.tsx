@@ -2,16 +2,17 @@ import * as React from "react";
 import {Text, StyleSheet, View, TouchableOpacity, Linking} from "react-native";
 import Caretdown from '@/assets/svg/caretdown';
 import {
-    createStaticNavigation,
+    createStaticNavigation, StackActions,
     useNavigation,
 } from '@react-navigation/native';
+
 
 const NavBar = () => {
     const navigation = useNavigation();
 
     const wikiUrl = 'https://elementscommunity.org/wiki/Main_Page';
     const forumUrl = 'https://elementscommunity.org/forum/index.php';
-
+    const kofiUrl = 'https://ko-fi.com/sparklmonkey';
 
     const openUrl = (url: string) => {
         Linking.canOpenURL(url).then(supported => {
@@ -23,14 +24,20 @@ const NavBar = () => {
         });
     };
 
+    const navigateTo = (route: string) => {
+        navigation.dispatch(
+            StackActions.replace(route)
+        );
+    }
+
     return (
         <View style={styles.navBar}>
             <View style={styles.groupFlexBox}>
-                <TouchableOpacity onPress={() => navigation.navigate('MainPage')}>
-                    <Text style={styles.elementsTheRevival}></Text>
+                <TouchableOpacity onPress={() => navigateTo('MainPage')}>
+                    <Text style={styles.elementsTheRevival}>Elements the Revival</Text>
                 </TouchableOpacity>
                 <View style={styles.links}>
-                    <TouchableOpacity onPress={() => navigation.navigate('LeaderboardPage')}>
+                    <TouchableOpacity onPress={() => navigateTo('LeaderboardPage')}>
                         <Text style={styles.wiki}>Leaderboard</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => openUrl(wikiUrl)}>
@@ -39,14 +46,16 @@ const NavBar = () => {
                     <TouchableOpacity onPress={() => openUrl(forumUrl)}>
                         <Text style={styles.wiki}>Forum</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('GameRulesPage')}>
+                    <TouchableOpacity onPress={() => navigateTo('GameRulesPage')}>
                         <Text style={styles.wiki}>Game Rules</Text>
                     </TouchableOpacity>
                     <View style={styles.contact}>
                         <Text style={styles.wiki}>Contact</Text>
-                        <Caretdown width={16} height={16} />
+                        <Caretdown width={16} height={16}/>
                     </View>
-                    <Text style={styles.supportUs}>Support Us</Text>
+                    <TouchableOpacity onPress={() => openUrl(kofiUrl)}>
+                        <Text style={styles.supportUs}>Support Us</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>);

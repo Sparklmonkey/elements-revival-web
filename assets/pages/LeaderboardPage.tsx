@@ -38,10 +38,6 @@ const LeaderboardPage = () => {
             });
     }, []);
 
-    function searchByUsername(username: string) {
-
-    }
-
     async function getScoreboardByUsername(username: string) {
         const userData = leaderboardArray.find(item => item.username === username);
         if (userData) {
@@ -130,10 +126,10 @@ const LeaderboardPage = () => {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{flexGrow: 1}}>
-                <NavBar/>
+                <NavBar />
                 <View style={[styles.view, styles.viewSpaceBlock]}>
                     <Text style={styles.leaderboard}>Leaderboard</Text>
-                    <Text style={styles.leaderboard}>Currently the leaderboard is limited to show the top 50 of each type, due to limitations</Text>
+                    <Text style={styles.leaderboard}>Due to technical limitation, the leaderboard can only show the top 50 of each category.</Text>
                     <LeaderboardSearchBar leaderboardType={changeLeaderboard} searchByUsername={getScoreboardByUsername} />
                     <View style={styles.text}>
                         <View style={[styles.textParent, styles.titleFlexBox]}>
@@ -186,7 +182,7 @@ const styles = StyleSheet.create({
     filterTypo: {
         textAlign: "left",
         fontSize: 16,
-        fontFamily: "Gill Sans",
+        fontFamily: "gillSans",
         fontWeight: "600"
     },
     titleFlexBox: {
@@ -215,7 +211,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.2,
         textAlign: "left",
         fontSize: 16,
-        fontFamily: "Gill Sans",
+        fontFamily: "gillSans",
         fontWeight: "600"
     },
     titleChildLayout: {
@@ -225,7 +221,15 @@ const styles = StyleSheet.create({
         fontSize: 28,
         color: "#ebf166",
         textAlign: "center",
-        fontFamily: "Gill Sans",
+        fontFamily: "gillSans",
+        fontWeight: "600",
+        alignSelf: "stretch"
+    },
+    subtitle: {
+        fontSize: 20,
+        color: "#ebf166",
+        textAlign: "center",
+        fontFamily: "gillSans",
         fontWeight: "600",
         alignSelf: "stretch"
     },
@@ -258,7 +262,7 @@ const styles = StyleSheet.create({
         letterSpacing: 0.2,
         textAlign: "left",
         fontSize: 16,
-        fontFamily: "Gill Sans",
+        fontFamily: "gillSans",
         fontWeight: "600"
     },
     caretupdownIcon: {},
