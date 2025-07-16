@@ -5,27 +5,26 @@ import Caretdown from '@/assets/svg/caretdown';
 import {useSelector} from "react-redux";
 import {RootState} from "@/assets/store/store";
 import {ReactUnityEventParameter} from "react-unity-webgl/distribution/types/react-unity-event-parameters";
+import EtgButton from "@/assets/components/EtgButton";
 
 
 const GameBar = () => {
-    const isUnityLoaded: (gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void = useSelector((state: RootState) => state.unityData.messageSender);
+    const sendUnityMessage: (gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void = useSelector((state: RootState) => state.unityData.messageSender);
 
     function openSettings() {
-        isUnityLoaded("SettingsButton", "OpenSettingsPanel");
+        sendUnityMessage("ReactReceiver", "ToggleSettingsPanel");
+    }
+
+    function loginToTrainerAccount() {
+        sendUnityMessage("ReactReceiver", "LoginToTrainerAccount");
     }
 
     return (
         <View style={styles.game}>
             <View style={styles.gameBar}>
                 <Text style={styles.version553}>Version 5.5.3</Text>
-                <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
-                    <Text style={styles.trainer}>Trainer</Text>
-                </ImageBackground>
-                <TouchableOpacity onPress={openSettings}>
-                    <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
-                        <Text style={styles.trainer}>Setting</Text>
-                    </ImageBackground>
-                </TouchableOpacity>
+                <EtgButton text={'Trainer'} onPress={loginToTrainerAccount} />
+                <EtgButton text={'Settings'} onPress={openSettings} />
                 <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
                     <Text style={styles.trainer}>Game Rules</Text>
                 </ImageBackground>

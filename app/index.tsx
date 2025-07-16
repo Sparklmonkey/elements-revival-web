@@ -5,7 +5,6 @@ import HomePage from "@/assets/pages/HomePage";
 import LeaderboardPage from "@/assets/pages/LeaderboardPage";
 import {Provider} from "react-redux";
 import {store} from "@/assets/store/store";
-import EtgButton from "@/assets/components/EtgButton";
 
 function Index() {
     const Stack = createStackNavigator();

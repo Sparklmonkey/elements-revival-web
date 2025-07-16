@@ -1,32 +1,26 @@
-import * as React from "react"
-import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
+import * as React from "react";
 const Bullet = (props) => (
-    <Svg
+    <svg
         xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        width={20}
-        height={21}
-        fill="none"
+        width="20"
+        height="20"
+        viewBox="0 0 126.000000 96.000000"
+        preserveAspectRatio="xMidYMid meet"
+        transform="rotate(90 0 0)"
         {...props}
     >
-        <Path fill="url(#a)" d="M0 .5h20v20H0z" />
-        <Defs>
-            <Pattern
-                id="a"
-                width={1}
-                height={1}
-                patternContentUnits="objectBoundingBox"
-            >
-                <Use xlinkHref="#b" transform="scale(.05)" />
-            </Pattern>
-            <Image
-                xlinkHref="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAUABQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD+NzQ7LT9R1fTrHVtZt/D2mXV3DFf63d2moX8Gl2jMPPu3sdLtrvULsxRhjHbW0DPNLsjZ4UZ5o/2W1f8A4JwfCjT/ANlP48ePtF8a6x8RfHXw5+GHwx/aF+FXxD8FWkum+H/iX8LPHr6na+I9N1bwJq+oaxcw/wDCvLnw/rkPibWtL1XSNS8P3yRWmuaL52nSWus/mn+z38bX+CeteObqP4ZfCv4nSfEH4c6/8NUtPivotvq+l+GG8RXOmzDxZoMl3eWNtpXiPTDp/lWWqTzrFbwXVyHZVYsP1y1r9nKD4Kfs7fHHxdJ+0r43lf8AZx+Hvwn1zxFo3wHl8D6F8ONT+J/x2tJPCmk+EPCGq6Vp+ti6Tw3Jd6TD45+Kcer3us+KYNR1RY/D+kzWpuLr8fwdOnKFWUqSrWp1eZt8jo2pzaknKXLJqMZVVypSXsrOVpWf75jq1WFSjGNaVC9SlyJR51XvWoxcWox5oJynGg+aXJJVublbipR/A6iiivPPUCu2HxK+IK+Af+FVp408TRfDVtfk8VS+A4NZvoPCd14lkt7e1Ov3uhQzJp19q6WtpbW0OoXkE91bwQpDBLHGNtFFNNq9m1dWdna6e6fdPsJpO10nZpq6Ts1s1fZro1qjiaKKKQz/2Q=="
-                id="b"
-                width={20}
-                height={20}
-                preserveAspectRatio="none"
-            />
-        </Defs>
-    </Svg>
-)
-export default Bullet
+        <g
+            transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)"
+            fill="#CBBEB5"
+            stroke="none"
+        >
+            <path d="M570 942 c-47 -23 -75 -76 -66 -125 27 -144 236 -127 236 19 0 54 -23 92 -67 110 -43 18 -61 18 -103 -4z" />
+            <path d="M215 723 c-94 -168 -86 -249 24 -252 29 0 71 -6 93 -13 61 -18 141 -97 183 -180 39 -79 44 -67 20 46 -18 87 -62 182 -108 232 -19 22 -62 54 -96 73 -63 36 -98 84 -88 122 8 30 1 23 -28 -28z" />
+            <path d="M1015 730 c0 -48 -17 -67 -102 -116 -109 -64 -180 -194 -197 -359 l-7 -60 17 40 c62 145 156 223 284 233 76 5 100 22 100 68 0 40 -30 122 -68 186 l-27 47 0 -39z" />
+            <path d="M580 613 c0 -5 7 -47 15 -95 9 -48 19 -142 24 -210 4 -68 9 -105 10 -83 2 49 27 294 37 353 l7 42 -47 0 c-25 0 -46 -3 -46 -7z" />
+            <path d="M6 470 c8 -90 39 -193 70 -230 37 -44 68 -56 159 -64 95 -7 173 -41 259 -110 39 -32 56 -42 53 -29 -3 10 -11 43 -18 73 -24 108 -84 211 -143 242 -11 7 -64 15 -116 18 -66 5 -107 13 -135 28 -40 20 -102 79 -124 117 -9 16 -10 7 -5 -45z" />
+            <path d="M1218 470 c-53 -69 -122 -100 -242 -109 -115 -9 -146 -28 -194 -119 -27 -51 -72 -191 -72 -225 0 -5 24 13 53 39 75 68 158 104 261 113 52 5 97 15 118 27 48 28 94 126 108 233 6 45 10 84 8 86 -2 1 -20 -19 -40 -45z" />
+        </g>
+    </svg>
+);
+export default Bullet;
