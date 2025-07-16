@@ -5,12 +5,16 @@ import {
     createStaticNavigation, StackActions,
     useNavigation,
 } from '@react-navigation/native';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {updateShouldShowUnity} from "@/assets/store/pageReducer";
+import {RootState} from "@/assets/store/store";
+import {setUnityIsLoaded} from "@/assets/store/unityReducer";
 
 const NavBar = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
+    const unityUnloader: () => Promise<void> = useSelector((state: RootState) => state.unityData.unityUnloader);
+    const isUnityLoaded: boolean = useSelector((state: RootState) => state.unityData.isUnityLoaded);
 
     const wikiUrl = 'https://elementscommunity.org/wiki/Main_Page';
     const forumUrl = 'https://elementscommunity.org/forum/index.php';
@@ -26,8 +30,11 @@ const NavBar = () => {
         });
     };
 
-    const navigateTo = (route: string) => {
-        dispatch(updateShouldShowUnity(route === "HomePage"));
+    const navigateTo = async (route: string) => {
+        if (route !== "HomePage" || isUnityLoaded) {
+            await unityUnloader();
+            dispatch(setUnityIsLoaded(false))
+        }
         navigation.dispatch(
             StackActions.replace(route)
         );

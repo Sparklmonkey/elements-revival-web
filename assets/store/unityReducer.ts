@@ -1,0 +1,46 @@
+﻿import {leaderboardItemProps} from "@/assets/components/LeaderboardItem";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {ReactUnityEventParameter} from "react-unity-webgl/distribution/types/react-unity-event-parameters";
+
+function defaultUnload(): Promise<void> {
+    return new Promise<void>((resolve) => {
+        resolve();
+    });
+}
+
+const initialState: UnityData = {
+    messageSender: defaultMessage,
+    unityUnloader: defaultUnload,
+    isUnityLoaded: false,
+}
+
+function defaultMessage(gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter)  {
+    return;
+}
+
+export interface UnityData {
+    messageSender: (gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void,
+    unityUnloader: () => Promise<void>,
+    isUnityLoaded: boolean,
+}
+
+export const unitySlice = createSlice({
+    name: 'unity',
+    initialState,
+    reducers: {
+        setMessageSender: (state, action: PayloadAction<(gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void>) => {
+            state.messageSender = action.payload
+        },
+        setUnityUnloader: (state, action: PayloadAction<() => Promise<void>>) => {
+            state.unityUnloader = action.payload
+        },
+        setUnityIsLoaded: (state, action: PayloadAction<boolean>) => {
+            state.isUnityLoaded = action.payload
+        }
+    },
+})
+
+// Action creators are generated for each case reducer function
+export const { setMessageSender, setUnityUnloader, setUnityIsLoaded } = unitySlice.actions
+
+export default unitySlice.reducer

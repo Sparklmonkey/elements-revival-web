@@ -1,10 +1,19 @@
 import * as React from "react";
-import {Text, StyleSheet, View, ImageBackground, Image} from "react-native";
+import {Text, StyleSheet, View, ImageBackground, Image, TouchableOpacity} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Caretdown from '@/assets/svg/caretdown';
+import {useSelector} from "react-redux";
+import {RootState} from "@/assets/store/store";
+import {ReactUnityEventParameter} from "react-unity-webgl/distribution/types/react-unity-event-parameters";
 
 
 const GameBar = () => {
+    const isUnityLoaded: (gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void = useSelector((state: RootState) => state.unityData.messageSender);
+
+    function openSettings() {
+        isUnityLoaded("SettingsButton", "OpenSettingsPanel");
+    }
+
     return (
         <View style={styles.game}>
             <View style={styles.gameBar}>
@@ -12,9 +21,11 @@ const GameBar = () => {
                 <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
                     <Text style={styles.trainer}>Trainer</Text>
                 </ImageBackground>
-                <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
-                    <Text style={styles.trainer}>Setting</Text>
-                </ImageBackground>
+                <TouchableOpacity onPress={openSettings}>
+                    <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
+                        <Text style={styles.trainer}>Setting</Text>
+                    </ImageBackground>
+                </TouchableOpacity>
                 <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
                     <Text style={styles.trainer}>Game Rules</Text>
                 </ImageBackground>

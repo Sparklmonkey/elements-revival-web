@@ -1,7 +1,7 @@
 ﻿### GET request to example server
 #Authenticate Admin
 POST https://services.api.unity.com/auth/v1/token-exchange?projectId=ec77d6b3-4d48-4c2c-a1d4-f84f9dac7aaa&environmentId=80206c0b-5c1b-428e-8935-1132903075c2
-Authorization: Basic ZWQwZTU4NTktY2NlYS00ZWRhLWFlNTgtOGRkOTNmYWZhOWUxOjQyRDRBMmtVb2RWbHVRai1GQUdrZHhOWGlReUkwaVo4
+Authorization: {{authKey}}
 ###
 #Get Top 25 Leaderboard
 GET https://leaderboards.services.api.unity.com/v1/projects/ec77d6b3-4d48-4c2c-a1d4-f84f9dac7aaa/leaderboards/Seasonal_T50/scores?
