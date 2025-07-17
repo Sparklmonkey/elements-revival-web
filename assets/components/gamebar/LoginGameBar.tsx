@@ -20,7 +20,6 @@ const LoginGameBar = () => {
     }
 
     return (
-        <View style={styles.game}>
             <View style={styles.gameBar}>
                 <Text style={styles.version553}>Version 5.5.3</Text>
                 <EtgButton text={'Trainer'} onPress={loginToTrainerAccount} />
@@ -29,7 +28,6 @@ const LoginGameBar = () => {
                     <Text style={styles.trainer}>Game Rules</Text>
                 </ImageBackground>
             </View>
-        </View>
     );
 };
 const styles = StyleSheet.create({

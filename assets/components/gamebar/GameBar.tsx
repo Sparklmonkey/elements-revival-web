@@ -1,48 +1,41 @@
 import * as React from "react";
 import {Text, StyleSheet, View, ImageBackground, Image, TouchableOpacity} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {SafeAreaView} from "react-native-safe-area-context";
 import Caretdown from '@/assets/svg/caretdown';
 import {useSelector} from "react-redux";
 import {RootState} from "@/assets/store/store";
 import {ReactUnityEventParameter} from "react-unity-webgl/distribution/types/react-unity-event-parameters";
 import EtgButton from "@/assets/components/EtgButton";
+import LoginGameBar from "@/assets/components/gamebar/LoginGameBar";
+import DashboardGameBar from "@/assets/components/gamebar/DashboardGameBar";
+import BattlefieldGameBar from "@/assets/components/gamebar/BattlefieldGameBar";
+import {FC} from "react";
 
+type GameBarProps = {
+    screenName: string;
+}
 
-const DashboardGameBar = () => {
-    const sendUnityMessage: (gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void = useSelector((state: RootState) => state.unityData.messageSender);
-
-    function openSettings() {
-        sendUnityMessage("DashboardReactReceiver", "ToggleSettingsPanel");
+function GetGameBar({ screenName }: GameBarProps) {
+    switch (screenName) {
+        case "LoginScreen":
+            return (<LoginGameBar />);
+        case "DashboardScreen":
+            return (<DashboardGameBar />);
+        case "BattlefieldScreen":
+            return (<BattlefieldGameBar />);
     }
+    return null;
+}
 
-    function resetAccount() {
-        sendUnityMessage("DashboardReactReceiver", "ResetAccount");
-    }
-
-    function accountInfo() {
-        sendUnityMessage("DashboardReactReceiver", "AccountInfo");
-    }
-
-    function logout() {
-        sendUnityMessage("DashboardReactReceiver", "Logout");
-    }
-
-    function saveGame() {
-        sendUnityMessage("ReactReceiver", "SaveGame");
-    }
+const GameBar = () => {
+    const screenName: string = useSelector((state: RootState) => state.unityData.screenName);
 
     return (
-            <View style={styles.gameBar}>
-                <Text style={styles.version553}>Version 5.5.3</Text>
-                <EtgButton text={'Save Game'} onPress={saveGame} />
-                <EtgButton text={'Logout'} onPress={logout} />
-                <EtgButton text={'Settings'} onPress={openSettings} />
-                <EtgButton text={'Reset Account'} onPress={resetAccount} />
-                <EtgButton text={'Account Info'} onPress={accountInfo} />
-            </View>
+        <View style={styles.game}>
+            <GetGameBar screenName={screenName} />
+        </View>
     );
 };
-
 const styles = StyleSheet.create({
     trainer: {
         fontSize: 12,
@@ -87,4 +80,4 @@ const styles = StyleSheet.create({
         flex: 1
     },
 });
-export default DashboardGameBar;
+export default GameBar;

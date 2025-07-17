@@ -9,6 +9,7 @@ import OtherGames from "@/assets/components/OtherGames";
 import {UnityView} from "@/assets/pages/UnityView";
 import {useSelector} from "react-redux";
 import {RootState} from "@/assets/store/store";
+import GameBar from "@/assets/components/gamebar/GameBar";
 
 const HomePage = () => {
 
@@ -19,7 +20,7 @@ const HomePage = () => {
                 <ScrollView contentContainerStyle={{flexGrow: 1}}>
                 <View style={styles.view}>
                     <NavBar />
-                    <LoginGameBar />
+                    <GameBar />
                     <BackgroundDragon />
                     <View style={styles.gameIconLayout}>
                         {shouldShowUnity ? <UnityView /> : <View />}

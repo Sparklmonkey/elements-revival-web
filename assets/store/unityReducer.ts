@@ -1,5 +1,4 @@
-﻿import {leaderboardItemProps} from "@/assets/components/LeaderboardItem";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+﻿import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ReactUnityEventParameter} from "react-unity-webgl/distribution/types/react-unity-event-parameters";
 
 function defaultUnload(): Promise<void> {
@@ -14,6 +13,7 @@ const initialState: UnityData = {
     isUnityLoaded: false,
     aiTurnCount: 0,
     aiName: "",
+    screenName: "LoginScreen",
 }
 
 function defaultMessage(gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter)  {
@@ -26,6 +26,7 @@ export interface UnityData {
     isUnityLoaded: boolean,
     aiTurnCount: number,
     aiName: string,
+    screenName: string,
 }
 
 export const unitySlice = createSlice({
@@ -46,11 +47,14 @@ export const unitySlice = createSlice({
         },
         updateAiName: (state, action: PayloadAction<string>) => {
             state.aiName = action.payload
+        },
+        updateScreenName: (state, action: PayloadAction<string>) => {
+            state.screenName = action.payload
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setMessageSender, setUnityUnloader, setUnityIsLoaded, updateAiTurnCount, updateAiName } = unitySlice.actions
+export const { setMessageSender, setUnityUnloader, setUnityIsLoaded, updateAiTurnCount, updateAiName, updateScreenName } = unitySlice.actions
 
 export default unitySlice.reducer

@@ -12,18 +12,9 @@ import {useUnityContext} from "react-unity-webgl";
 
 
 const BattlefieldGameBar = () => {
-    const dispatch = useDispatch();
     const sendUnityMessage: (gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void = useSelector((state: RootState) => state.unityData.messageSender);
     const aiTurnCount: number = useSelector((state: RootState) => state.unityData.aiTurnCount);
     const aiName: string = useSelector((state: RootState) => state.unityData.aiName);
-
-    function updateAiUsername(aiName: string) {
-        dispatch(updateAiName(aiName));
-    }
-
-    function setAiTurnCount(aiTurnCount: number) {
-        dispatch(updateAiTurnCount(aiTurnCount));
-    }
 
     function openSettings() {
         sendUnityMessage("BattlefieldReactReceiver", "ToggleSettingsPanel");
@@ -42,7 +33,6 @@ const BattlefieldGameBar = () => {
     }
 
     return (
-        <View style={styles.game}>
             <View style={styles.gameBar}>
                 <Text style={styles.version553}>Version 5.5.3</Text>
                 <EtgButton text={'Menu'} onPress={openMenu} />
@@ -52,7 +42,6 @@ const BattlefieldGameBar = () => {
                 <EtgButton text={'Settings'} onPress={openSettings} />
                 <Text>{aiName}</Text>
             </View>
-        </View>
     );
 };
 
