@@ -10,6 +10,15 @@ const codeUrl = 'https://firebasestorage.googleapis.com/v0/b/elementstheproject.
 export function UnityView() {
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        addEventListener("SetScore", updateAiUsername);
+        addEventListener("SetScore", setAiTurnCount);
+        return () => {
+            removeEventListener("SetScore", updateAiUsername);
+            removeEventListener("SetScore", setAiTurnCount);
+        };
+    }, [setAiTurnCount, updateAiUsername]);
     const { unityProvider, sendMessage, isLoaded, unload } = useUnityContext({
         loaderUrl: loaderUrl,
         dataUrl: dataUrl,

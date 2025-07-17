@@ -8,15 +8,15 @@ import {ReactUnityEventParameter} from "react-unity-webgl/distribution/types/rea
 import EtgButton from "@/assets/components/EtgButton";
 
 
-const GameBar = () => {
+const LoginGameBar = () => {
     const sendUnityMessage: (gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void = useSelector((state: RootState) => state.unityData.messageSender);
 
     function openSettings() {
-        sendUnityMessage("ReactReceiver", "ToggleSettingsPanel");
+        sendUnityMessage("LoginReactReceiver", "ToggleSettingsPanel");
     }
 
     function loginToTrainerAccount() {
-        sendUnityMessage("ReactReceiver", "LoginToTrainerAccount");
+        sendUnityMessage("LoginReactReceiver", "LoginToTrainerAccount");
     }
 
     return (
@@ -25,7 +25,7 @@ const GameBar = () => {
                 <Text style={styles.version553}>Version 5.5.3</Text>
                 <EtgButton text={'Trainer'} onPress={loginToTrainerAccount} />
                 <EtgButton text={'Settings'} onPress={openSettings} />
-                <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../images/button.png")}>
+                <ImageBackground style={styles.buttonIcon} resizeMode="stretch" source={require("../../images/button.png")}>
                     <Text style={styles.trainer}>Game Rules</Text>
                 </ImageBackground>
             </View>
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
         flex: 1
     },
 });
-export default GameBar;
+export default LoginGameBar;

@@ -2,7 +2,7 @@ import * as React from "react";
 import {Image, StyleSheet, Text, View, ImageBackground, ScrollView} from "react-native";
 import BackgroundDragon from "@/assets/components/BackgroundDragon";
 import NavBar from "@/assets/components/NavBar";
-import GameBar from "@/assets/components/GameBar";
+import LoginGameBar from "@/assets/components/gamebar/LoginGameBar";
 import Footer from "@/assets/components/Footer";
 import GameDescription from "@/assets/components/GameDescription";
 import OtherGames from "@/assets/components/OtherGames";
@@ -19,7 +19,7 @@ const HomePage = () => {
                 <ScrollView contentContainerStyle={{flexGrow: 1}}>
                 <View style={styles.view}>
                     <NavBar />
-                    <GameBar />
+                    <LoginGameBar />
                     <BackgroundDragon />
                     <View style={styles.gameIconLayout}>
                         {shouldShowUnity ? <UnityView /> : <View />}

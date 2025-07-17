@@ -12,6 +12,8 @@ const initialState: UnityData = {
     messageSender: defaultMessage,
     unityUnloader: defaultUnload,
     isUnityLoaded: false,
+    aiTurnCount: 0,
+    aiName: "",
 }
 
 function defaultMessage(gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter)  {
@@ -22,6 +24,8 @@ export interface UnityData {
     messageSender: (gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter) => void,
     unityUnloader: () => Promise<void>,
     isUnityLoaded: boolean,
+    aiTurnCount: number,
+    aiName: string,
 }
 
 export const unitySlice = createSlice({
@@ -36,11 +40,17 @@ export const unitySlice = createSlice({
         },
         setUnityIsLoaded: (state, action: PayloadAction<boolean>) => {
             state.isUnityLoaded = action.payload
+        },
+        updateAiTurnCount: (state, action: PayloadAction<number>) => {
+            state.aiTurnCount = action.payload
+        },
+        updateAiName: (state, action: PayloadAction<string>) => {
+            state.aiName = action.payload
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setMessageSender, setUnityUnloader, setUnityIsLoaded } = unitySlice.actions
+export const { setMessageSender, setUnityUnloader, setUnityIsLoaded, updateAiTurnCount, updateAiName } = unitySlice.actions
 
 export default unitySlice.reducer
