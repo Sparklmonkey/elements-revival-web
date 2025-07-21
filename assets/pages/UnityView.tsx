@@ -9,6 +9,7 @@ import {
     updateAiName,
     updateScreenName
 } from "@/assets/store/unityReducer";
+import LoadingElements from "@/assets/components/LoadingElements";
 
 const loaderUrl ='https://firebasestorage.googleapis.com/v0/b/elementstheproject.firebasestorage.app/o/Unity.loader.js?alt=media';
 const dataUrl = 'https://firebasestorage.googleapis.com/v0/b/elementstheproject.firebasestorage.app/o/Unity.data?alt=media';
@@ -42,15 +43,15 @@ export function UnityView() {
 
     useEffect(() => {
         unloadUnity()
-        addEventListener("UpdateAiUsername", updateAiUsername);
+        addEventListener("UpdateAiName", updateAiUsername);
         addEventListener("UpdateAiTurnCount", setAiTurnCount);
         addEventListener("UpdateScreenName", setScreenName);
         return () => {
-            removeEventListener("UpdateAiUsername", updateAiUsername);
+            removeEventListener("UpdateAiName", updateAiUsername);
             removeEventListener("UpdateAiTurnCount", setAiTurnCount);
             removeEventListener("UpdateScreenName", setScreenName);
         };
-    }, [setAiTurnCount, updateAiUsername, isLoaded, setScreenName]);
+    }, [addEventListener, removeEventListener, setAiTurnCount, updateAiUsername, isLoaded, setScreenName]);
 
     const unloadUnity = () => {
         dispatch(setUnityUnloader(unload));
@@ -59,6 +60,9 @@ export function UnityView() {
     }
     return (
         <Fragment>
+            {
+                isLoaded === true ?  null : <LoadingElements />
+            }
             <Unity unityProvider={unityProvider} />
         </Fragment>
     );

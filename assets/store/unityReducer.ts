@@ -13,7 +13,7 @@ const initialState: UnityData = {
     isUnityLoaded: false,
     aiTurnCount: 0,
     aiName: "",
-    screenName: "LoginScreen",
+    screenName: "SplashScreen",
 }
 
 function defaultMessage(gameObjectName: string, methodName: string, parameter?: ReactUnityEventParameter)  {

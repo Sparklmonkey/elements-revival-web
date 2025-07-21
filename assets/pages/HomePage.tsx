@@ -10,10 +10,9 @@ import {UnityView} from "@/assets/pages/UnityView";
 import {useSelector} from "react-redux";
 import {RootState} from "@/assets/store/store";
 import GameBar from "@/assets/components/gamebar/GameBar";
+import LoadingElements from "@/assets/components/LoadingElements";
 
 const HomePage = () => {
-
-    const shouldShowUnity: boolean = useSelector((state:RootState) => state.pageData.shouldShowUnity);
 
     return (
             <View style={styles.container}>
@@ -23,7 +22,7 @@ const HomePage = () => {
                     <GameBar />
                     <BackgroundDragon />
                     <View style={styles.gameIconLayout}>
-                        {shouldShowUnity ? <UnityView /> : <View />}
+                        <UnityView />
                     </View>
                     <GameDescription />
                     <OtherGames />
