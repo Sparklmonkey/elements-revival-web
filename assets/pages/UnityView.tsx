@@ -38,6 +38,7 @@ export function UnityView() {
     }, []);
 
     const setScreenName = useCallback((screenName: string) => {
+        console.log(screenName);
         dispatch(updateScreenName(screenName));
     }, []);
 

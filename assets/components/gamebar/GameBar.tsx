@@ -1,15 +1,12 @@
 import * as React from "react";
 import {Text, StyleSheet, View, ImageBackground, Image, TouchableOpacity} from "react-native";
-import {SafeAreaView} from "react-native-safe-area-context";
-import Caretdown from '@/assets/svg/caretdown';
 import {useSelector} from "react-redux";
 import {RootState} from "@/assets/store/store";
-import {ReactUnityEventParameter} from "react-unity-webgl/distribution/types/react-unity-event-parameters";
-import EtgButton from "@/assets/components/EtgButton";
 import LoginGameBar from "@/assets/components/gamebar/LoginGameBar";
 import DashboardGameBar from "@/assets/components/gamebar/DashboardGameBar";
 import BattlefieldGameBar from "@/assets/components/gamebar/BattlefieldGameBar";
-import {FC} from "react";
+import DeckManagementGameBar from "@/assets/components/gamebar/DeckManagementGameBar";
+import BazaarGameBar from "@/assets/components/gamebar/BazaarGameBar";
 
 type GameBarProps = {
     screenName: string;
@@ -17,12 +14,18 @@ type GameBarProps = {
 
 function GetGameBar({ screenName }: GameBarProps) {
     switch (screenName) {
+        case "NewLoginScreen":
+            return (<LoginGameBar />);
         case "LoginScreen":
             return (<LoginGameBar />);
-        case "DashboardScreen":
+        case "Dashboard":
             return (<DashboardGameBar />);
-        case "BattlefieldScreen":
+        case "Battlefield":
             return (<BattlefieldGameBar />);
+        case "DeckManagement":
+            return (<DeckManagementGameBar />);
+        case "Bazaar":
+            return (<BazaarGameBar />);
     }
     return null;
 }

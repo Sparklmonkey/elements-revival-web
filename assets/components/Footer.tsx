@@ -1,4 +1,4 @@
-﻿import {Image, StyleSheet, Text, View} from "react-native";
+﻿import {Image, Linking, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Caretdown from "@/assets/svg/caretdown";
 import QuickLink from "@/assets/components/QuickLink";
 import * as React from "react";
@@ -6,8 +6,20 @@ import InstagramIcon from "@/assets/svg/InstagramIcon";
 import YoutubeIcon from "@/assets/svg/YoutubeIcon";
 import FooterDragon from "@/assets/svg/FooterDragon";
 import FooterDecor from "@/assets/svg/FooterDecor";
+import DiscordIcon from "@/assets/svg/DiscordIcon";
+import TwitchIcon from "@/assets/svg/TwitchIcon";
 
 const Footer = () => {
+
+    function openUrl(url: string) {
+        Linking.canOpenURL(url).then(supported => {
+            if (supported) {
+                Linking.openURL(url);
+            } else {
+                console.log("Don't know how to open URI: " + url);
+            }
+        });
+    };
 
     return (
         <View style={styles.container}>
@@ -19,45 +31,64 @@ const Footer = () => {
                             <Text style={styles.elementsTheRevival1}>Elements The Revival</Text>
                             <Text style={styles.revivingTheSoul}>Reviving the soul of forgotten things.</Text>
                             <View style={styles.socials}>
-                                <InstagramIcon/>
-                                <YoutubeIcon/>
-                            </View>
+                                <TouchableOpacity onPress={() => {
+                                    openUrl("https://discord.gg/kZa3HTmDzz")
+                                }}>
+                                    <InstagramIcon/>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => {
+                                    openUrl("https://discord.gg/kZa3HTmDzz")
+                                }}>
+                                    <YoutubeIcon/>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => {
+                                    openUrl("https://discord.gg/kZa3HTmDzz")
+                                }}>
+                                    <DiscordIcon/>
+                                </TouchableOpacity>
+                            <TouchableOpacity onPress={() => {
+                                openUrl("https://discord.gg/kZa3HTmDzz")
+                            }}>
+                                <TwitchIcon/>
+                            </TouchableOpacity>
                         </View>
-                        <View style={styles.contactUs}>
-                            <Text style={styles.contactUs1Typo}>Contact Us</Text>
-                            <View style={styles.inputArea}>
-                                <Text style={styles.enterEMailHere}>Enter e-mail here</Text>
-                                <View style={styles.button}>
-                                    <Text style={styles.send}>Send</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>
                     </View>
-                    <View style={styles.allLinks}>
-                        <View style={styles.quickLinks}>
-                            <Text style={styles.quickLinks1}>Quick Links</Text>
-                            <View style={styles.tips}>
-                                <QuickLink linkName={"About"}/>
-                                <QuickLink linkName={"Contact"}/>
-                                <QuickLink linkName={"Privacy Policy"}/>
-                                <QuickLink linkName={"Terms of Use"}/>
+                    <View style={styles.contactUs}>
+                        <Text style={styles.contactUs1Typo}>Contact Us</Text>
+                        <View style={styles.inputArea}>
+                            <Text style={styles.enterEMailHere}>Enter e-mail here</Text>
+                            <View style={styles.button}>
+                                <Text style={styles.send}>Send</Text>
                             </View>
                         </View>
-                        <View style={styles.quickLinks2}>
-                            <Text style={styles.games}>Games</Text>
-                            <View style={styles.tips}>
-                                <QuickLink linkName={"Elements the Revival"}/>
-                                <QuickLink linkName={"Open EtG"}/>
-                            </View>
+                    </View>
+                    <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>
+                </View>
+                <View style={styles.allLinks}>
+                    <View style={styles.quickLinks}>
+                        <Text style={styles.quickLinks1}>Quick Links</Text>
+                        <View style={styles.tips}>
+                            <QuickLink linkName={"About"}/>
+                            <QuickLink linkName={"Contact"}/>
+                            <QuickLink linkName={"Privacy Policy"}/>
+                            <QuickLink linkName={"Terms of Use"}/>
+                        </View>
+                    </View>
+                    <View style={styles.quickLinks2}>
+                        <Text style={styles.games}>Games</Text>
+                        <View style={styles.tips}>
+                            <QuickLink linkName={"Elements the Revival"}/>
+                            <QuickLink linkName={"Open EtG"}/>
                         </View>
                     </View>
                 </View>
-                <Image style={styles.footerChild} resizeMode="cover" source={require("../images/footer-dragon.png")}/>
-                <FooterDragon style={styles.decorativeLineIcon}/>
             </View>
+            <Image style={styles.footerChild} resizeMode="cover" source={require("../images/footer-dragon.png")}/>
+            <FooterDragon style={styles.decorativeLineIcon}/>
         </View>
-    );
+</View>
+)
+    ;
 };
 
 const styles = StyleSheet.create({
@@ -121,7 +152,6 @@ const styles = StyleSheet.create({
     },
     container: {
         width: '100%',
-        flex: 1,
         marginHorizontal: 12,
         backgroundColor: "#32241b",
     },

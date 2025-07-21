@@ -287,6 +287,7 @@ const styles = StyleSheet.create({
         borderRadius: 100
     },
     textGroup: {
+        maxHeight: 450,
         gap: 16,
         alignSelf: "stretch"
     },
