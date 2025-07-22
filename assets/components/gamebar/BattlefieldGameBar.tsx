@@ -1,14 +1,9 @@
 import * as React from "react";
-import {Text, StyleSheet, View, ImageBackground, Image, TouchableOpacity} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Caretdown from '@/assets/svg/caretdown';
-import {useDispatch, useSelector} from "react-redux";
+import {Text, StyleSheet, View} from "react-native";
+import { useSelector} from "react-redux";
 import {RootState} from "@/assets/store/store";
 import {ReactUnityEventParameter} from "react-unity-webgl/distribution/types/react-unity-event-parameters";
 import EtgButton from "@/assets/components/EtgButton";
-import {useEffect} from "react";
-import {updateAiName, updateAiTurnCount} from "@/assets/store/unityReducer";
-import {useUnityContext} from "react-unity-webgl";
 
 
 const BattlefieldGameBar = () => {
@@ -46,26 +41,6 @@ const BattlefieldGameBar = () => {
 };
 
 const styles = StyleSheet.create({
-    trainer: {
-        fontSize: 12,
-        textAlign: "left",
-        fontFamily: "dauphin",
-        color: '#EBF166',
-    },
-    buttonIcon: {
-        width: 120,
-        height: 26,
-        paddingVertical: 9,
-        justifyContent: "center",
-        flexDirection: "row",
-        alignItems: "center"
-    },
-    game: {
-        zIndex: 3,
-        gap: 24,
-        width: '75%',
-        marginTop: 50,
-    },
     gameBar: {
         backgroundColor: "#411b00",
         paddingHorizontal: 24,
