@@ -29,26 +29,6 @@ const LoginGameBar = () => {
 };
 
 const styles = StyleSheet.create({
-    trainer: {
-        fontSize: 12,
-        textAlign: "left",
-        fontFamily: "dauphin",
-        color: '#EBF166',
-    },
-    buttonIcon: {
-        width: 120,
-        height: 26,
-        paddingVertical: 9,
-        justifyContent: "center",
-        flexDirection: "row",
-        alignItems: "center"
-    },
-    game: {
-        zIndex: 3,
-        gap: 24,
-        width: '75%',
-        marginTop: 50,
-    },
     gameBar: {
         backgroundColor: "#411b00",
         paddingHorizontal: 24,
