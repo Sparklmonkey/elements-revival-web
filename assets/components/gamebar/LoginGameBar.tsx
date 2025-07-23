@@ -27,6 +27,7 @@ const LoginGameBar = () => {
             </View>
     );
 };
+
 const styles = StyleSheet.create({
     trainer: {
         fontSize: 12,

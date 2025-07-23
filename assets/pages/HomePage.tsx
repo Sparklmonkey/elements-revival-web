@@ -2,15 +2,11 @@ import * as React from "react";
 import {Image, StyleSheet, Text, View, ImageBackground, ScrollView} from "react-native";
 import BackgroundDragon from "@/assets/components/BackgroundDragon";
 import NavBar from "@/assets/components/NavBar";
-import LoginGameBar from "@/assets/components/gamebar/LoginGameBar";
 import Footer from "@/assets/components/Footer";
 import GameDescription from "@/assets/components/GameDescription";
 import OtherGames from "@/assets/components/OtherGames";
-import {UnityView} from "@/assets/pages/UnityView";
-import {useSelector} from "react-redux";
-import {RootState} from "@/assets/store/store";
+import UnityView from "@/assets/pages/UnityView";
 import GameBar from "@/assets/components/gamebar/GameBar";
-import LoadingElements from "@/assets/components/LoadingElements";
 
 const HomePage = () => {
 

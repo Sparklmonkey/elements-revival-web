@@ -1,0 +1,10 @@
+{
+  "achievements": [
+    {
+      "achievementId": 1,
+      "achievementName": "Combat Master",
+      "achievementTier": 0,
+      "rewardTierClaimed": -1
+    }
+  ]
+}
