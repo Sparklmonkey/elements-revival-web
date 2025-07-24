@@ -5,8 +5,8 @@ import NavBar from "@/assets/components/NavBar";
 import Footer from "@/assets/components/Footer";
 import GameDescription from "@/assets/components/GameDescription";
 import OtherGames from "@/assets/components/OtherGames";
-import UnityView from "@/assets/pages/UnityView";
 import GameBar from "@/assets/components/gamebar/GameBar";
+import {UnityView} from "@/assets/pages/UnityView";
 
 const HomePage = () => {
 

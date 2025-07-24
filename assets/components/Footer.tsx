@@ -8,6 +8,7 @@ import FooterDragon from "@/assets/svg/FooterDragon";
 import FooterDecor from "@/assets/svg/FooterDecor";
 import DiscordIcon from "@/assets/svg/DiscordIcon";
 import TwitchIcon from "@/assets/svg/TwitchIcon";
+import ContactForm from "@/assets/components/ContactForm";
 
 const Footer = () => {
 
@@ -46,49 +47,45 @@ const Footer = () => {
                                 }}>
                                     <DiscordIcon/>
                                 </TouchableOpacity>
-                            <TouchableOpacity onPress={() => {
-                                openUrl("https://discord.gg/kZa3HTmDzz")
-                            }}>
-                                <TwitchIcon/>
-                            </TouchableOpacity>
+                                <TouchableOpacity onPress={() => {
+                                    openUrl("https://discord.gg/kZa3HTmDzz")
+                                }}>
+                                    <TwitchIcon/>
+                                </TouchableOpacity>
+                            </View>
                         </View>
+                        <View style={styles.contactUs}>
+                            <Text style={styles.contactUs1Typo}>Contact Us</Text>
+
+                        </View>
+                        <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>
                     </View>
-                    <View style={styles.contactUs}>
-                        <Text style={styles.contactUs1Typo}>Contact Us</Text>
-                        <View style={styles.inputArea}>
-                            <Text style={styles.enterEMailHere}>Enter e-mail here</Text>
-                            <View style={styles.button}>
-                                <Text style={styles.send}>Send</Text>
+                    <ContactForm />
+                    <View style={styles.allLinks}>
+                        <View style={styles.quickLinks}>
+                            <Text style={styles.quickLinks1}>Quick Links</Text>
+                            <View style={styles.tips}>
+                                <QuickLink linkName={"About"}/>
+                                <QuickLink linkName={"Contact"}/>
+                                <QuickLink linkName={"Privacy Policy"}/>
+                                <QuickLink linkName={"Terms of Use"}/>
+                            </View>
+                        </View>
+                        <View style={styles.quickLinks2}>
+                            <Text style={styles.games}>Games</Text>
+                            <View style={styles.tips}>
+                                <QuickLink linkName={"Elements the Revival"}/>
+                                <QuickLink linkName={"Open EtG"}/>
                             </View>
                         </View>
                     </View>
-                    <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>
                 </View>
-                <View style={styles.allLinks}>
-                    <View style={styles.quickLinks}>
-                        <Text style={styles.quickLinks1}>Quick Links</Text>
-                        <View style={styles.tips}>
-                            <QuickLink linkName={"About"}/>
-                            <QuickLink linkName={"Contact"}/>
-                            <QuickLink linkName={"Privacy Policy"}/>
-                            <QuickLink linkName={"Terms of Use"}/>
-                        </View>
-                    </View>
-                    <View style={styles.quickLinks2}>
-                        <Text style={styles.games}>Games</Text>
-                        <View style={styles.tips}>
-                            <QuickLink linkName={"Elements the Revival"}/>
-                            <QuickLink linkName={"Open EtG"}/>
-                        </View>
-                    </View>
-                </View>
+                <Image style={styles.footerChild} resizeMode="cover" source={require("../images/footer-dragon.png")}/>
+                <FooterDragon style={styles.decorativeLineIcon}/>
             </View>
-            <Image style={styles.footerChild} resizeMode="cover" source={require("../images/footer-dragon.png")}/>
-            <FooterDragon style={styles.decorativeLineIcon}/>
         </View>
-</View>
-)
-    ;
+    )
+        ;
 };
 
 const styles = StyleSheet.create({
@@ -138,10 +135,18 @@ const styles = StyleSheet.create({
         gap: 24
     },
     allLinks: {
-        width: 398,
+        minWidth: 250,
+        width: '20%',
         flexDirection: "row",
         gap: 0,
         justifyContent: "space-between"
+    },
+    contactForm: {
+        minWidth: 350,
+        width: '30%',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        backgroundColor: "#ebf166",
     },
     elementsTheRevival2: {
         alignSelf: "stretch",
@@ -209,7 +214,8 @@ const styles = StyleSheet.create({
         overflow: "hidden"
     },
     leftContainer: {
-        width: 375,
+        minWidth: 375,
+        width: '33%',
         gap: 24
     },
     gameDescription: {

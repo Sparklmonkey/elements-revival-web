@@ -1,8 +1,6 @@
 import React from "react";
 import * as Font from "expo-font";
 import Index from "@/app/index";
-import {Platform, View, Text} from 'react-native';
-import MobileIndex from "@/app/mobileIndex";
 
 
 export default class App extends React.Component {
@@ -17,7 +15,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-          Platform.OS === 'web' ? <Index /> : <MobileIndex />
+        <Index />
     );
   }
 }
