@@ -7,6 +7,7 @@ type PreviewCardProps = {
     title: string;
     description: string;
     pageUrl: string;
+    developer: string;
 }
 
 const GamePreviewCard = (props: PreviewCardProps) => {
@@ -25,6 +26,7 @@ const GamePreviewCard = (props: PreviewCardProps) => {
                    source={props.imageUrl}/>
             <View style={styles.gameDescription}>
                 <Text style={styles.openetg}>{props.title}</Text>
+                <Text style={styles.developerTitle}>Developed by {props.developer}</Text>
                 <Text style={styles.openetgIsA}>{props.description}</Text>
             </View>
             <TouchableOpacity onPress={handleClick}>
@@ -69,6 +71,14 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         color: "#ebf166",
         fontWeight: "600",
+        textAlign: "left",
+        fontFamily: "gillSans"
+    },
+    developerTitle: {
+        fontSize: 20,
+        alignSelf: "stretch",
+        color: "white",
+        fontWeight: "400",
         textAlign: "left",
         fontFamily: "gillSans"
     },

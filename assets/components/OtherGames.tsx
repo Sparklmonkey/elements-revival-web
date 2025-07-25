@@ -9,6 +9,7 @@ const OtherGamesList = [
         id: '0',
         title: 'openEtG',
         pageUrl: 'https://etg.dek.im/',
+        developer: 'Serprex',
         imageUrl: require('../images/game-preview.png'),
         description: 'OpenETG is a fast-paced, strategic online collectible card game where you build custom decks and battle against players or AI using the forces of nature and magic. I',
     },
@@ -16,6 +17,7 @@ const OtherGamesList = [
         id: '1',
         title: 'openEtG',
         pageUrl: 'https://etg.dek.im/',
+        developer: 'Serprex',
         imageUrl: require('../images/game-preview.png'),
         description: 'OpenETG is a fast-paced, strategic online collectible card game where you build custom decks and battle against players or AI using the forces of nature and magic. I',
     },
@@ -35,7 +37,7 @@ const OtherGames = () => {
                 horizontal={true}
                 style={styles.otherGames}
                 data={OtherGamesList}
-                renderItem={({item}) => <GamePreviewCard pageUrl={item.pageUrl} title={item.title} description={item.description} imageUrl={item.imageUrl} />}
+                renderItem={({item}) => <GamePreviewCard {...item} />}
                 keyExtractor={item => item.id}
             />
         </View>

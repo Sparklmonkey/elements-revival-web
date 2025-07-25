@@ -54,10 +54,6 @@ const Footer = () => {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={styles.contactUs}>
-                            <Text style={styles.contactUs1Typo}>Contact Us</Text>
-
-                        </View>
                         <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>
                     </View>
                     <ContactForm />
@@ -174,23 +170,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: "left",
         fontFamily: "gillSans"
-    },
-    send: {
-        color: "#fff",
-        fontSize: 14,
-        textAlign: "left",
-        fontFamily: "gillSans"
-    },
-    button: {
-        width: 80,
-        backgroundColor: "#d38030",
-        paddingHorizontal: 8,
-        paddingVertical: 10,
-        justifyContent: "center",
-        borderRadius: 8,
-        flexDirection: "row",
-        alignItems: "center",
-        overflow: "hidden"
     },
     container1: {
         width: '100%',
