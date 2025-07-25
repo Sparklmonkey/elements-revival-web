@@ -1,16 +1,32 @@
-﻿import RNSmtpMailer from "react-native-smtp-mailer";
+﻿import axios from "axios";
+import {setAccessToken, setAuthenticated} from "@/assets/store/pageReducer";
 
-export async function sendEmail(to:string, subject:string, body:string) {
-    RNSmtpMailer.sendMail({
-        mailhost: "live.smtp.mailtrap.io",
-        port: "587",
-        ssl: true,
-        username: "smtp@mailtrap.io",
-        password: "c81e4c3f1cc52d630f0ca019d7cb7510",
-        recipients: "sparklmonkeygames@gmail.com",
-        subject: "This is a test Subject",
-        htmlBody: "This is a test Message",
-    })
-        .then(success => console.log(success))
-        .catch(err => console.log(err));
+export async function sendEmail(props: EmailProps) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    try {
+        const {data} = await axios.post(
+            'https://elementstherevival.com/api/send-feedback',
+            {
+                senderEmail: props.senderEmail,
+                username: props.username,
+                firstName: props.firstName,
+                playerId: props.playerId,
+                message: props.message
+            },
+            {headers: headers});
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+export type EmailProps = {
+    senderEmail: string
+    username: string
+    firstName: string
+    playerId: string
+    message: string
 }

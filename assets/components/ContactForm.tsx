@@ -1,21 +1,27 @@
 import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import * as React from "react";
 import {useState} from "react";
-import {sendEmail} from "@/assets/functions/sendEmail";
+import {EmailProps, sendEmail} from "@/assets/functions/sendEmail";
 
 const ContactForm = () => {
 
     const TOKEN = "bf29554249e07a1bc6e20a6c878d2477";
 
-    const [emailInputText, setEmailInputText] = useState<string>("");
-    const [firstNameInputText, setFirstNameInputText] = useState<string>("");
-    const [usernameInputText, setUsernameInputText] = useState<string>("");
-    const [playerIdInputText, setPlayerIdInputText] = useState<string>("");
-    const [messageInputText, setMessageInputText] = useState<string>("");
+    const [emailInputText, setEmailInputText] = useState<string>('');
+    const [firstNameInputText, setFirstNameInputText] = useState<string>('');
+    const [usernameInputText, setUsernameInputText] = useState<string>('');
+    const [playerIdInputText, setPlayerIdInputText] = useState<string>('');
+    const [messageInputText, setMessageInputText] = useState<string>('');
 
     function createAndSendEmail() {
-        sendEmail(emailInputText, "User Feedback", messageInputText)
-            .then((result) => {console.log(result)})
+        const emailProps: EmailProps = {
+            senderEmail: emailInputText,
+            username: usernameInputText,
+            firstName: firstNameInputText,
+            playerId: playerIdInputText,
+            message: messageInputText,
+        }
+        sendEmail(emailProps).then((result) => {console.log(result);});
     }
 
     return (
@@ -27,8 +33,6 @@ const ContactForm = () => {
                 <View style={styles.formColumn}>
                     <View style={styles.searchBar}>
                         <TextInput
-                            onSubmitEditing={() => {
-                            }}
                             style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
                             onChangeText={setEmailInputText}
                             value={emailInputText}
@@ -38,8 +42,6 @@ const ContactForm = () => {
                     </View>
                     <View style={styles.searchBar}>
                         <TextInput
-                            onSubmitEditing={() => {
-                            }}
                             style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
                             onChangeText={setFirstNameInputText}
                             value={firstNameInputText}
@@ -49,8 +51,6 @@ const ContactForm = () => {
                     </View>
                     <View style={styles.searchBar}>
                         <TextInput
-                            onSubmitEditing={() => {
-                            }}
                             style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
                             onChangeText={setUsernameInputText}
                             value={usernameInputText}
@@ -60,8 +60,6 @@ const ContactForm = () => {
                     </View>
                     <View style={styles.searchBar}>
                         <TextInput
-                            onSubmitEditing={() => {
-                            }}
                             style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
                             onChangeText={setPlayerIdInputText}
                             value={playerIdInputText}
@@ -73,8 +71,6 @@ const ContactForm = () => {
                 <View style={styles.formColumn}>
                     <View style={styles.searchBar}>
                         <TextInput
-                            onSubmitEditing={() => {
-                            }}
                             multiline={true}
                             numberOfLines={7}
                             style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}

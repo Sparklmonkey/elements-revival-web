@@ -12,7 +12,7 @@ type LeaderboardSearchBarProps = {
 const LeaderboardSearchBar = (props: LeaderboardSearchBarProps) => {
 
     const [searchText, setsearchText] = useState<string>("");
-
+    console.log(searchText);
     return (
         <View style={styles.searchBarParent}>
             <View style={styles.searchBar}>

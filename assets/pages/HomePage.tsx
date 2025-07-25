@@ -18,7 +18,6 @@ const HomePage = () => {
                     <GameBar />
                     <BackgroundDragon />
                     <View style={styles.gameIconLayout}>
-                        <UnityView />
                     </View>
                     <GameDescription />
                     <OtherGames />
