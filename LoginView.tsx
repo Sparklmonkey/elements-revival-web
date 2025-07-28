@@ -19,7 +19,7 @@ interface LoginViewProps {
 }
 
 const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -46,7 +46,7 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
     };
 
     const handleLogin = async () => {
-        if (!email || !password) {
+        if (!username || !password) {
             Alert.alert('Error', 'Please fill in all fields');
             return;
         }
@@ -72,16 +72,18 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
             <Text style={styles.title}>Login</Text>
             <Text style={styles.subtitle}>Login to manage your Elements Account.</Text>
             <View style={styles.formContainer}>
-                <InputWithTitle title={"Email"}
-                                keyboardType={"email-address"}
-                                updateTextMethod={setEmail}
-                                textValue={email}
-                                placeHolder={"Enter your email"} />
+                <InputWithTitle title={"Username"}
+                                keyboardType={"default"}
+                                updateTextMethod={setUsername}
+                                textValue={username}
+                                placeHolder={"Enter your username"}
+                                isSecureText={false} />
                 <InputWithTitle title={"Password"}
                                 keyboardType={"default"}
                                 updateTextMethod={setPassword}
                                 textValue={password}
-                                placeHolder={"Enter your password"} />
+                                placeHolder={"Enter your password"}
+                                isSecureText={true} />
 
                 <TouchableOpacity
                     style={styles.button}

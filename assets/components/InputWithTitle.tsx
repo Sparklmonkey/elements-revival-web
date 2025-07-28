@@ -8,8 +8,10 @@ type InputWithTitleProps = {
     updateTextMethod: (text: string) => void,
     textValue: string,
     placeHolder: string,
+    isSecureText: boolean,
 }
 const InputWithTitle = (props: InputWithTitleProps) => {
+
     return (
         <View style={styles.inputGroup}>
             <Text style={styles.label}>{props.title}</Text>
@@ -20,6 +22,7 @@ const InputWithTitle = (props: InputWithTitleProps) => {
                 keyboardType={props.keyboardType}
                 autoCapitalize="none"
                 placeholder={props.placeHolder}
+                secureTextEntry={props.isSecureText}
                 placeholderTextColor="rgba(255, 255, 255, 0.5)"
             />
         </View>
