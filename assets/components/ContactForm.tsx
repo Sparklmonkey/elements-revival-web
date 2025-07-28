@@ -1,28 +1,120 @@
-import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import * as React from "react";
-import {useState} from "react";
-import {EmailProps, sendEmail} from "@/assets/functions/sendEmail";
+import { useState } from "react";
+import { EmailProps, sendEmail } from "@/assets/functions/sendEmail";
+
+interface FormErrors {
+    email: string;
+    firstName: string;
+    username: string;
+    message: string;
+}
 
 const ContactForm = () => {
-
-    const TOKEN = "bf29554249e07a1bc6e20a6c878d2477";
-
     const [emailInputText, setEmailInputText] = useState<string>('');
     const [firstNameInputText, setFirstNameInputText] = useState<string>('');
     const [usernameInputText, setUsernameInputText] = useState<string>('');
     const [playerIdInputText, setPlayerIdInputText] = useState<string>('');
     const [messageInputText, setMessageInputText] = useState<string>('');
+    const [errors, setErrors] = useState<FormErrors>({
+        email: '',
+        firstName: '',
+        username: '',
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    function createAndSendEmail() {
-        const emailProps: EmailProps = {
-            senderEmail: emailInputText,
-            username: usernameInputText,
-            firstName: firstNameInputText,
-            playerId: playerIdInputText,
-            message: messageInputText,
+    const validateEmail = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const validateForm = (): boolean => {
+        const newErrors: FormErrors = {
+            email: '',
+            firstName: '',
+            username: '',
+            message: ''
+        };
+        let isValid = true;
+
+        // Email validation
+        if (!emailInputText.trim()) {
+            newErrors.email = 'Email is required';
+            isValid = false;
+        } else if (!validateEmail(emailInputText)) {
+            newErrors.email = 'Please enter a valid email address';
+            isValid = false;
         }
-        sendEmail(emailProps).then((result) => {console.log(result);});
-    }
+
+        // First name validation
+        if (!firstNameInputText.trim()) {
+            newErrors.firstName = 'First name is required';
+            isValid = false;
+        } else if (firstNameInputText.length < 2) {
+            newErrors.firstName = 'First name must be at least 2 characters';
+            isValid = false;
+        }
+
+        // Username validation
+        if (!usernameInputText.trim()) {
+            newErrors.username = 'Username is required';
+            isValid = false;
+        } else if (usernameInputText.length < 3) {
+            newErrors.username = 'Username must be at least 3 characters';
+            isValid = false;
+        }
+
+        // Message validation
+        if (!messageInputText.trim()) {
+            newErrors.message = 'Message is required';
+            isValid = false;
+        } else if (messageInputText.length < 10) {
+            newErrors.message = 'Message must be at least 10 characters';
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
+    };
+
+    const createAndSendEmail = async () => {
+        if (!validateForm()) {
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            const emailProps: EmailProps = {
+                senderEmail: emailInputText,
+                username: usernameInputText,
+                firstName: firstNameInputText,
+                playerId: playerIdInputText,
+                message: messageInputText,
+            };
+            
+            const result = await sendEmail(emailProps);
+            alert('Feedback has been sent successfully. Thank you for your feedback.');
+            
+            // Clear form after successful submission
+            setEmailInputText('');
+            setFirstNameInputText('');
+            setUsernameInputText('');
+            setPlayerIdInputText('');
+            setMessageInputText('');
+            setErrors({
+                email: '',
+                firstName: '',
+                username: '',
+                message: ''
+            });
+        } catch (error) {
+            alert('Failed to send message. Please try again later.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -31,58 +123,79 @@ const ContactForm = () => {
             </View>
             <View style={styles.formContainer}>
                 <View style={styles.formColumn}>
-                    <View style={styles.searchBar}>
-                        <TextInput
-                            style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
-                            onChangeText={setEmailInputText}
-                            value={emailInputText}
-                            placeholder="Enter e-mail here"
-                            keyboardType="default"
-                        />
+                    <View>
+                        <View style={[styles.searchBar, errors.email && styles.errorInput]}>
+                            <TextInput
+                                style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
+                                onChangeText={setEmailInputText}
+                                value={emailInputText}
+                                placeholder="Enter e-mail here"
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                            />
+                        </View>
+                        {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
                     </View>
-                    <View style={styles.searchBar}>
-                        <TextInput
-                            style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
-                            onChangeText={setFirstNameInputText}
-                            value={firstNameInputText}
-                            placeholder="First name"
-                            keyboardType="default"
-                        />
+
+                    <View>
+                        <View style={[styles.searchBar, errors.firstName && styles.errorInput]}>
+                            <TextInput
+                                style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
+                                onChangeText={setFirstNameInputText}
+                                value={firstNameInputText}
+                                placeholder="First name"
+                            />
+                        </View>
+                        {errors.firstName && <Text style={styles.errorText}>{errors.firstName}</Text>}
                     </View>
-                    <View style={styles.searchBar}>
-                        <TextInput
-                            style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
-                            onChangeText={setUsernameInputText}
-                            value={usernameInputText}
-                            placeholder="Account Username"
-                            keyboardType="default"
-                        />
+
+                    <View>
+                        <View style={[styles.searchBar, errors.username && styles.errorInput]}>
+                            <TextInput
+                                style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
+                                onChangeText={setUsernameInputText}
+                                value={usernameInputText}
+                                placeholder="Account Username"
+                                autoCapitalize="none"
+                            />
+                        </View>
+                        {errors.username && <Text style={styles.errorText}>{errors.username}</Text>}
                     </View>
+
                     <View style={styles.searchBar}>
                         <TextInput
                             style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
                             onChangeText={setPlayerIdInputText}
                             value={playerIdInputText}
                             placeholder="Player Id (Optional)"
-                            keyboardType="default"
                         />
                     </View>
                 </View>
+
                 <View style={styles.formColumn}>
-                    <View style={styles.searchBar}>
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={7}
-                            style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
-                            onChangeText={setMessageInputText}
-                            value={messageInputText}
-                            placeholder="Write your message here"
-                            keyboardType="default"
-                        />
+                    <View>
+                        <View style={[styles.searchBar, errors.message && styles.errorInput]}>
+                            <TextInput
+                                multiline={true}
+                                numberOfLines={7}
+                                style={[styles.searchByUsername, ({outlineStyle: 'none'} as any)]}
+                                onChangeText={setMessageInputText}
+                                value={messageInputText}
+                                placeholder="Write your message here"
+                            />
+                        </View>
+                        {errors.message && <Text style={styles.errorText}>{errors.message}</Text>}
                     </View>
-                    <TouchableOpacity onPress={createAndSendEmail}>
+
+                    <TouchableOpacity 
+                        onPress={createAndSendEmail}
+                        disabled={isSubmitting}
+                        style={isSubmitting ? styles.buttonDisabled : null}
+                    >
                         <View style={styles.button}>
-                            <Text style={styles.send}>Send Message</Text>
+                            <Text style={styles.send}>
+                                {isSubmitting ? 'Sending...' : 'Send Message'}
+                            </Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -92,6 +205,7 @@ const ContactForm = () => {
 };
 
 const styles = StyleSheet.create({
+    // ... existing styles remain the same ...
     searchBar: {
         backgroundColor: "rgba(213, 206, 123, 0.15)",
         gap: 8,
@@ -167,6 +281,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
         overflow: "hidden"
     },
-})
+    errorInput: {
+        borderColor: '#ff4444',
+    },
+    errorText: {
+        color: '#ff4444',
+        fontSize: 12,
+        marginTop: 4,
+        marginLeft: 4,
+        fontFamily: "gillSans"
+    },
+    buttonDisabled: {
+        opacity: 0.7,
+    },
+});
 
 export default ContactForm;

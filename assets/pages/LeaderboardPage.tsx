@@ -4,7 +4,7 @@ import LeaderboardItem, {leaderboardItemProps} from "@/assets/components/Leaderb
 import LeaderboardHeader from "@/assets/components/LeaderboardHeader";
 import NavBar from "@/assets/components/NavBar";
 import Footer from "@/assets/components/Footer";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux";
 import LeaderboardSearchBar from "@/assets/components/LeaderboardSearchBar";
@@ -15,8 +15,31 @@ import {
     setOverallLeaderboard,
     setSeasonalLeaderboard
 } from "@/assets/store/pageReducer";
+import {useNavigation} from "@react-navigation/native";
 
 const LeaderboardPage = () => {
+
+    const navigation = useNavigation();
+    const scrollViewRef = useRef<ScrollView>(null);
+    const footerRef = useRef<View>(null);
+    const [isFooterHighlighted, setIsFooterHighlighted] = useState(false);
+
+    const scrollToFooter = () => {
+        // Measure the footer position
+        footerRef.current?.measureLayout(
+            // @ts-ignore - Known issue with React Native types
+            scrollViewRef.current?.getInnerViewNode(),
+            (x: number, y: number) => {
+                // Scroll to the footer position
+                scrollViewRef.current?.scrollTo({ y, animated: true });
+                // Highlight the footer
+                setIsFooterHighlighted(true);
+                // Remove highlight after 2 seconds
+                setTimeout(() => setIsFooterHighlighted(false), 2000);
+            },
+            () => console.log("Failed to measure")
+        );
+    };
 
     const basicAuthToken: string = useSelector((state: RootState) => state.pageData.basicAuthToken);
     const accessToken: string = useSelector((state: RootState) => state.pageData.accessToken);
@@ -124,8 +147,8 @@ const LeaderboardPage = () => {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={{flexGrow: 1}}>
-                <NavBar />
+            <ScrollView ref={scrollViewRef} contentContainerStyle={{flexGrow: 1}}>
+                <NavBar onContactPress={scrollToFooter} navigation={navigation} />
                 <View style={[styles.view, styles.viewSpaceBlock]}>
                     <Text style={styles.leaderboard}>Leaderboard</Text>
                     <Text style={styles.leaderboard}>Due to technical limitation, the leaderboard can only show the top 50 of each category.</Text>
@@ -145,7 +168,11 @@ const LeaderboardPage = () => {
                         </View>
                     </View>
                 </View>
-                <Footer/>
+                <View style={{width: '100%'}}
+                      ref={footerRef}
+                >
+                    <Footer highlightContact={isFooterHighlighted} />
+                </View>
             </ScrollView>
         </View>
     );

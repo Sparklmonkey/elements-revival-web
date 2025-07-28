@@ -28,3 +28,9 @@ Content-Type: application/json
 }
 
 ###
+
+
+GET https://services.api.unity.com/player-identity/v1/projects/ec77d6b3-4d48-4c2c-a1d4-f84f9dac7aaa/users?username=TheGreat
+accept: application/json
+Content-Type: application/json
+Authorization: {{authKey}}

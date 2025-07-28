@@ -1,5 +1,5 @@
-﻿import {Image, Linking, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import Caretdown from "@/assets/svg/caretdown";
+﻿import { Animated, Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useRef } from "react";
 import QuickLink from "@/assets/components/QuickLink";
 import * as React from "react";
 import InstagramIcon from "@/assets/svg/InstagramIcon";
@@ -9,8 +9,46 @@ import FooterDecor from "@/assets/svg/FooterDecor";
 import DiscordIcon from "@/assets/svg/DiscordIcon";
 import TwitchIcon from "@/assets/svg/TwitchIcon";
 import ContactForm from "@/assets/components/ContactForm";
+import QuickLinkContainer from "@/assets/components/QuickLinkContainer";
 
-const Footer = () => {
+export type FooterProps = {
+    highlightContact: boolean
+}
+
+const Footer = (props: FooterProps) => {
+    const pulseAnim = useRef(new Animated.Value(0)).current;
+    
+    useEffect(() => {
+        if (props.highlightContact) {
+            // Reset animation value
+            pulseAnim.setValue(0);
+            // Create pulse animation sequence
+            Animated.sequence([
+                Animated.timing(pulseAnim, {
+                    toValue: 1,
+                    duration: 300,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(pulseAnim, {
+                    toValue: 0.8,
+                    duration: 300,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(pulseAnim, {
+                    toValue: 1,
+                    duration: 300,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(pulseAnim, {
+                    toValue: 0,
+                    duration: 1000,
+                    useNativeDriver: true,
+                }),
+            ]).start();
+        } else {
+            pulseAnim.setValue(0);
+        }
+    }, [props.highlightContact]);
 
     function openUrl(url: string) {
         Linking.canOpenURL(url).then(supported => {
@@ -56,32 +94,32 @@ const Footer = () => {
                         </View>
                         <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>
                     </View>
-                    <ContactForm />
-                    <View style={styles.allLinks}>
-                        <View style={styles.quickLinks}>
-                            <Text style={styles.quickLinks1}>Quick Links</Text>
-                            <View style={styles.tips}>
-                                <QuickLink linkName={"About"}/>
-                                <QuickLink linkName={"Contact"}/>
-                                <QuickLink linkName={"Privacy Policy"}/>
-                                <QuickLink linkName={"Terms of Use"}/>
-                            </View>
-                        </View>
-                        <View style={styles.quickLinks2}>
-                            <Text style={styles.games}>Games</Text>
-                            <View style={styles.tips}>
-                                <QuickLink linkName={"Elements the Revival"}/>
-                                <QuickLink linkName={"Open EtG"}/>
-                            </View>
-                        </View>
-                    </View>
+                    <Animated.View style={[
+                            styles.contactFormContainer,
+                            {
+                                transform: [
+                                    {
+                                        scale: pulseAnim.interpolate({
+                                            inputRange: [0, 1],
+                                            outputRange: [1, 1.05]
+                                        })
+                                    }
+                                ],
+                                opacity: pulseAnim.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [1, 0.95]
+                                })
+                            }
+                        ]}>
+                        <ContactForm />
+                    </Animated.View>
+                    <QuickLinkContainer />
                 </View>
                 <Image style={styles.footerChild} resizeMode="cover" source={require("../images/footer-dragon.png")}/>
                 <FooterDragon style={styles.decorativeLineIcon}/>
             </View>
         </View>
-    )
-        ;
+    );
 };
 
 const styles = StyleSheet.create({
@@ -104,46 +142,6 @@ const styles = StyleSheet.create({
         zIndex: -1,
         position: "absolute",
     },
-    games: {
-        fontSize: 18,
-        alignSelf: "stretch",
-        color: "#ebf166",
-        fontWeight: "600",
-        textAlign: "left",
-        fontFamily: "gillSans"
-    },
-    quickLinks2: {
-        gap: 24
-    },
-    tips: {
-        gap: 16,
-        alignSelf: "stretch"
-    },
-    quickLinks1: {
-        fontSize: 18,
-        color: "#ebf166",
-        fontWeight: "600",
-        textAlign: "left",
-        fontFamily: "gillSans"
-    },
-    quickLinks: {
-        width: 91,
-        gap: 24
-    },
-    allLinks: {
-        minWidth: 250,
-        width: '20%',
-        flexDirection: "row",
-        gap: 0,
-        justifyContent: "space-between"
-    },
-    contactForm: {
-        minWidth: 350,
-        width: '30%',
-        flexDirection: "row",
-        justifyContent: "space-between",
-        backgroundColor: "#ebf166",
-    },
     elementsTheRevival2: {
         alignSelf: "stretch",
         fontFamily: "evanescence",
@@ -160,7 +158,7 @@ const styles = StyleSheet.create({
         paddingVertical: 40,
         gap: 43,
         zIndex: 6,
-        paddingHorizontal: 120,
+        paddingHorizontal: 48,
         width: '100%',
         overflow: "hidden"
     },
@@ -176,23 +174,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         zIndex: 0,
         gap: 0,
-        justifyContent: "space-between"
-    },
-    inputArea: {
-        backgroundColor: "#fff",
-        paddingLeft: 12,
-        paddingTop: 4,
-        paddingRight: 4,
-        paddingBottom: 4,
-        gap: 0,
-        justifyContent: "space-between",
-        alignSelf: "stretch",
-        borderRadius: 8,
-        flexDirection: "row",
-        alignItems: "center",
-        overflow: "hidden"
+        justifyContent: "flex-start"
     },
     leftContainer: {
+        flex: 1,
         minWidth: 375,
         width: '33%',
         gap: 24
@@ -235,6 +220,14 @@ const styles = StyleSheet.create({
         fontFamily: "gillSans",
         fontSize: 18,
         alignSelf: "stretch"
+    },
+    contactFormContainer: {
+        flex: 2,
+        minWidth: 350,
+        width: '30%',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderRadius: 8,
     },
 });
 

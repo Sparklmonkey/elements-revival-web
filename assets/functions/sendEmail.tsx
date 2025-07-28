@@ -1,10 +1,10 @@
 ﻿import axios from "axios";
-import {setAccessToken, setAuthenticated} from "@/assets/store/pageReducer";
 
 export async function sendEmail(props: EmailProps) {
     const headers = {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
     }
     try {
         const {data} = await axios.post(

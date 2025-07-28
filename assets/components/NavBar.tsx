@@ -1,18 +1,18 @@
 import * as React from "react";
 import {Text, StyleSheet, View, TouchableOpacity, Linking} from "react-native";
 import Caretdown from '@/assets/svg/caretdown';
-import {
-    createStaticNavigation, StackActions,
-    useNavigation,
-} from '@react-navigation/native';
 import {useDispatch, useSelector} from "react-redux";
-import {updateShouldShowUnity} from "@/assets/store/pageReducer";
 import {RootState} from "@/assets/store/store";
 import {setUnityIsLoaded} from "@/assets/store/unityReducer";
+import type {NavigationProp} from "@react-navigation/core/src/types";
 
-const NavBar = () => {
+export type NavBarProps = {
+    onContactPress: () => void
+    navigation: Omit<NavigationProp<ReactNavigation.RootParamList>, 'getState'>
+}
+
+const NavBar = (props:NavBarProps) => {
     const dispatch = useDispatch();
-    const navigation = useNavigation();
     const unityUnloader: () => Promise<void> = useSelector((state: RootState) => state.unityData.unityUnloader);
     const isUnityLoaded: boolean = useSelector((state: RootState) => state.unityData.isUnityLoaded);
 
@@ -31,13 +31,16 @@ const NavBar = () => {
     };
 
     const navigateTo = async (route: string) => {
-        if (route !== "HomePage" || isUnityLoaded) {
+
+        if (route !== "HomePage" && isUnityLoaded) {
+            console.log("Unity is loaded, unloading it");
             await unityUnloader();
             dispatch(setUnityIsLoaded(false))
         }
-        navigation.dispatch(
-            StackActions.replace(route)
-        );
+        props.navigation.reset({
+            index: 0,
+            routes: [{ name: route }],
+        });
     }
 
     return (
@@ -50,19 +53,18 @@ const NavBar = () => {
                     <TouchableOpacity onPress={() => navigateTo('LeaderboardPage')}>
                         <Text style={styles.wiki}>Leaderboard</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => openUrl(wikiUrl)}>
-                        <Text style={styles.wiki}>Wiki</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => openUrl(forumUrl)}>
-                        <Text style={styles.wiki}>Forum</Text>
+                    <TouchableOpacity onPress={() => navigateTo('AccountManagerPage')}>
+                        <Text style={styles.wiki}>Account Manager</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateTo('GameRulesPage')}>
                         <Text style={styles.wiki}>Game Rules</Text>
                     </TouchableOpacity>
-                    <View style={styles.contact}>
-                        <Text style={styles.wiki}>Contact</Text>
-                        <Caretdown width={16} height={16}/>
-                    </View>
+                    <TouchableOpacity onPress={props.onContactPress}>
+                        <View style={styles.contact}>
+                            <Text style={styles.wiki}>Contact</Text>
+                            <Caretdown width={16} height={16}/>
+                        </View>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => openUrl(kofiUrl)}>
                         <Text style={styles.supportUs}>Support Us</Text>
                     </TouchableOpacity>
