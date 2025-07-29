@@ -41,7 +41,6 @@ const GameRules = () => {
     ];
 
     return (
-        <SafeAreaView style={styles.viewBg}>
             <View style={[styles.view, styles.viewBg]}>
                 <Text style={styles.gameRules}>Game Rules</Text>
                 <View style={styles.text}>
@@ -56,7 +55,6 @@ const GameRules = () => {
                     />
                 </View>
             </View>
-        </SafeAreaView>
     );
 };
 
@@ -66,13 +64,14 @@ const styles = StyleSheet.create({
         flex: 1
     },
     view: {
-        width: "100%",
         borderRadius: 16,
         borderStyle: "solid",
         borderColor: "#d38030",
         borderWidth: 2,
         padding: 24,
-        gap: 24
+        gap: 40,
+        marginVertical: 60,
+        marginHorizontal: 120,
     },
     gameRules: {
         fontSize: 28,

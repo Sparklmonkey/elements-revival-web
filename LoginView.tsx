@@ -13,6 +13,7 @@ import NavBar from "@/assets/components/NavBar";
 import {useNavigation} from "@react-navigation/native";
 import Footer from "@/assets/components/Footer";
 import InputWithTitle from "@/assets/components/InputWithTitle";
+import {storage} from "@/assets/localStorage/localStorage";
 
 interface LoginViewProps {
     onLoginSuccess: () => void;

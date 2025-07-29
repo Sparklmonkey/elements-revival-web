@@ -60,6 +60,14 @@ const Footer = (props: FooterProps) => {
         });
     };
 
+    function SocialMediaIcon({url, icon} : {url: string, icon: any}) {
+        return <TouchableOpacity onPress={() => {
+            openUrl(url)
+        }}>
+            {icon}
+        </TouchableOpacity>
+    }
+
     return (
         <View style={styles.container}>
             <FooterDecor width={'100%'}/>
@@ -70,26 +78,10 @@ const Footer = (props: FooterProps) => {
                             <Text style={styles.elementsTheRevival1}>Elements The Revival</Text>
                             <Text style={styles.revivingTheSoul}>Reviving the soul of forgotten things.</Text>
                             <View style={styles.socials}>
-                                <TouchableOpacity onPress={() => {
-                                    openUrl("https://discord.gg/kZa3HTmDzz")
-                                }}>
-                                    <InstagramIcon/>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => {
-                                    openUrl("https://discord.gg/kZa3HTmDzz")
-                                }}>
-                                    <YoutubeIcon/>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => {
-                                    openUrl("https://discord.gg/kZa3HTmDzz")
-                                }}>
-                                    <DiscordIcon/>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => {
-                                    openUrl("https://discord.gg/kZa3HTmDzz")
-                                }}>
-                                    <TwitchIcon/>
-                                </TouchableOpacity>
+                                <SocialMediaIcon url={"https://discord.gg/kZa3HTmDzz"} icon={<InstagramIcon/>} />
+                                <SocialMediaIcon url={"https://discord.gg/kZa3HTmDzz"} icon={<YoutubeIcon/>} />
+                                <SocialMediaIcon url={"https://discord.gg/kZa3HTmDzz"} icon={<DiscordIcon/>} />
+                                <SocialMediaIcon url={"https://discord.gg/kZa3HTmDzz"} icon={<TwitchIcon/>} />
                             </View>
                         </View>
                         <Text style={styles.elementsTheRevival2}>© 2025 Elements: The Revival</Text>

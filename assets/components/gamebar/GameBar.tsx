@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         zIndex: 3,
         gap: 24,
         width: '75%',
-        marginTop: 50,
+        marginVertical: 150,
     },
 });
 export default GameBar;

@@ -1,7 +1,8 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import * as React from "react";
 import { useState } from "react";
-import { EmailProps, sendEmail } from "@/assets/functions/sendEmail";
+import {EmailProps, sendEmail} from "@/assets/api/contactServices";
+
 
 interface FormErrors {
     email: string;

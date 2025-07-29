@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
         zIndex: 5,
         gap: 24,
         width: '70%',
+        marginVertical: 50,
     },
     otherGames: {
         borderRadius: 16,
