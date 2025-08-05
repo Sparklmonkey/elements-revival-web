@@ -20,10 +20,10 @@ const LeaderboardPage = () => {
     useEffect(() => {
         getLeaderboardLegacy(basicAuthToken).then(response => {
                 console.log('getLeaderboardLegacy');
-                dispatch(setSeasonalLeaderboard(response.seasonalBoard));
-                dispatch(setOverallLeaderboard(response.overallBoard));
-                console.log(response.overallBoard);
-                setLeaderboardArray(response.overallBoard);
+                dispatch(setSeasonalLeaderboard(response.seasonalLeaderboard));
+                dispatch(setOverallLeaderboard(response.overallLeaderboard));
+                console.log(response.overallLeaderboard);
+                setLeaderboardArray(response.overallLeaderboard);
             }
         );
     }, [basicAuthToken, dispatch]);

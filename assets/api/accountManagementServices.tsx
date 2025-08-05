@@ -4,7 +4,7 @@ import {UnityLoginResponse} from "@/assets/types/models";
 
 export async function loginUnityUser(username: string, password: string) {
     const loginResponse = await axios.post(
-        `/api/accountManagementServices/login`,
+        "http://localhost:8080/api/log-in",
         { username, password },
         {
             headers: {
@@ -18,7 +18,15 @@ export async function loginUnityUser(username: string, password: string) {
         return loginResponse
     }).catch(error => {
         console.log(error)
+        const errorResponse: UnityLoginResponse = {
+            username: "",
+            playerId: "",
+            sessionToken: "",
+            idToken: "",
+        }
+        return errorResponse
     })
+    return loginResponse;
 }
 
 export async function migrateOldUnityToNew(playerData: PlayerDataLegacy) {

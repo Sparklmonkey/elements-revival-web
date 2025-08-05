@@ -8,7 +8,7 @@ export async function sendEmail(props: EmailProps) {
     }
     try {
         const {data} = await axios.post(
-            'https://elementstherevival.com/api/send-feedback',
+            'http://localhost:8080/api/feedback',
             {
                 senderEmail: props.senderEmail,
                 username: props.username,

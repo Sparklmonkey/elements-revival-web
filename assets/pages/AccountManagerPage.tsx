@@ -14,15 +14,7 @@ import NavBar from "@/assets/components/NavBar";
 import Footer from "@/assets/components/Footer";
 import {useNavigation} from "@react-navigation/native";
 import LoginView from "@/LoginView";
-
-interface UserProfile {
-    email: string;
-    username: string;
-    firstName: string;
-    lastName: string;
-    playerId: string;
-    dateJoined: string;
-}
+import {UserProfile} from "@/assets/types/models";
 
 interface AccountManagementProps {
     // Add any props you need to pass
@@ -34,14 +26,10 @@ const AccountManagerPage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // Add this handler
-    const handleLoginSuccess = () => {
+    const handleLoginSuccess = (userProfile: UserProfile) => {
+        setProfile(userProfile);
         setIsAuthenticated(true);
     };
-
-    // Modify your return statement to include authentication check
-    if (!isAuthenticated) {
-        return <LoginView onLoginSuccess={handleLoginSuccess} />;
-    }
 
     const navigation = useNavigation();
     const scrollViewRef = useRef<ScrollView>(null);
@@ -71,16 +59,12 @@ const AccountManagerPage = () => {
     const [profile, setProfile] = useState<UserProfile>({
         email: '',
         username: '',
-        firstName: '',
-        lastName: '',
         playerId: '',
         dateJoined: '',
     });
     const [editableProfile, setEditableProfile] = useState<UserProfile>({
         email: '',
         username: '',
-        firstName: '',
-        lastName: '',
         playerId: '',
         dateJoined: '',
     });
@@ -92,12 +76,6 @@ const AccountManagerPage = () => {
     const fetchUserProfile = async () => {
         try {
             setIsLoading(true);
-            // Replace with your actual API call
-            // const response = await getUserProfile();
-            // setProfile(response.data);
-            // setEditableProfile(response.data);
-
-            // Mock data for demonstration
             const mockData = {
                 email: 'user@example.com',
                 username: 'player123',
@@ -138,6 +116,12 @@ const AccountManagerPage = () => {
         // Implement password change logic or navigation
         Alert.alert('Change Password', 'Navigate to password change screen');
     };
+
+
+    // Modify your return statement to include authentication check
+    if (!isAuthenticated) {
+        return <LoginView onLoginSuccess={handleLoginSuccess} />;
+    }
 
     if (isLoading) {
         return (
@@ -181,28 +165,6 @@ const AccountManagerPage = () => {
                                 setEditableProfile(prev => ({ ...prev, username: text }))}
                             editable={isEditing}
                             autoCapitalize="none"
-                        />
-                    </View>
-
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>First Name</Text>
-                        <TextInput
-                            style={[styles.input, !isEditing && styles.inputDisabled]}
-                            value={isEditing ? editableProfile.firstName : profile.firstName}
-                            onChangeText={(text) => 
-                                setEditableProfile(prev => ({ ...prev, firstName: text }))}
-                            editable={isEditing}
-                        />
-                    </View>
-
-                    <View style={styles.inputGroup}>
-                        <Text style={styles.label}>Last Name</Text>
-                        <TextInput
-                            style={[styles.input, !isEditing && styles.inputDisabled]}
-                            value={isEditing ? editableProfile.lastName : profile.lastName}
-                            onChangeText={(text) => 
-                                setEditableProfile(prev => ({ ...prev, lastName: text }))}
-                            editable={isEditing}
                         />
                     </View>
 

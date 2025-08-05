@@ -1,7 +1,13 @@
-import {PlayerDataLegacy, UserData} from "@/assets/types/account";
-
 export interface UnityLoginResponse {
-    isLegacyUser: boolean,
-    playerData: PlayerDataLegacy,
-    userData: UserData,
+    username: string,
+    playerId: string,
+    sessionToken: string,
+    idToken: string,
+}
+
+export interface UserProfile {
+    email: string;
+    username: string;
+    playerId: string;
+    dateJoined: string;
 }

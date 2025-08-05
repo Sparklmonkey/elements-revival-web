@@ -14,9 +14,11 @@ import {useNavigation} from "@react-navigation/native";
 import Footer from "@/assets/components/Footer";
 import InputWithTitle from "@/assets/components/InputWithTitle";
 import {storage} from "@/assets/localStorage/localStorage";
+import {loginUnityUser} from "@/assets/api/accountManagementServices";
+import {UnityLoginResponse, UserProfile} from './assets/types/models';
 
 interface LoginViewProps {
-    onLoginSuccess: () => void;
+    onLoginSuccess: (user: UserProfile) => void;
 }
 
 const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
@@ -47,6 +49,7 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
     };
 
     const handleLogin = async () => {
+
         if (!username || !password) {
             Alert.alert('Error', 'Please fill in all fields');
             return;
@@ -54,12 +57,23 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
 
         try {
             setIsLoading(true);
-            // TODO: Replace with actual API call
+            const loginResponse = await loginUnityUser(username, password);
+            if (loginResponse.username === "") {
+                Alert.alert('Error', 'Please fill in all fields');
+                return;
+            }
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // For demo purposes, accept any non-empty input
-            onLoginSuccess();
+
+            const userProfile: UserProfile =
+            {
+                email: "",
+                username: loginResponse.username,
+                playerId: loginResponse.playerId,
+                dateJoined: ""
+            };
+
+            onLoginSuccess(userProfile);
         } catch (error) {
             Alert.alert('Error', 'Login failed. Please try again.');
         } finally {
